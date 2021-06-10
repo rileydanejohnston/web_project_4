@@ -1,16 +1,11 @@
-# Project 4: Around The U.S.
+# Around The U.S.
+------------------------
 
-### Overview
+## Description
+------------------------
+_"Around The U.S." allows a user to create a profile and customize a profile page. The project uses HTML and CSS to display their profile information as well as six destination cards. The project also JavaScript to process the user's profile information which is entered via a form._
 
-* Figma
-* Images
-
-**Figma**
-
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
-
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+## Future Features
+------------------------
+1. Liking photos
+2. Add and delete photos
