@@ -1,0 +1,8 @@
+.profile {
+  color: #FFFFFF;
+  width: 68.75%;
+  margin: 40px auto 0 auto;
+  display: flex;
+  position: relative;
+  min-height: 120px;
+}

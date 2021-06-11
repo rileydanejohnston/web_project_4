@@ -1,0 +1,9 @@
+.profile__info-container {
+  width: calc(100% - 150px); /* 120px avatar width + 30px margin */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  left: 150px;
+  top: 22px;
+}
