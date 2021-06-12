@@ -1,5 +1,10 @@
 .profile__name-button {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
+}
+@media screen and (max-width: 767px){
+  .profile__name-button {
+    width: 224px;
+  }
 }

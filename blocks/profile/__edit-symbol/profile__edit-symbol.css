@@ -1,0 +1,11 @@
+.profile__edit-symbol {
+  background-image: url('../../../images/edit-symbol.svg');
+  width: 10px;
+  height: 10px;
+}
+@media screen and (max-width: 767px){
+  .profile__edit-symbol {
+    width: 7.5px;
+    height: 7.5px;
+  }
+}

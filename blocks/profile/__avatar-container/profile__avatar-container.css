@@ -5,3 +5,10 @@
   left: -22.5px;
   top: -3.75px;
 }
+
+@media screen and (max-width: 1100px) {
+  .profile__avatar-container {
+    position: static;
+    margin: 0 auto;
+  }
+}
