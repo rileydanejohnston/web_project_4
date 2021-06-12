@@ -1,7 +1,6 @@
 .footer {
   margin: 68px 762px 60px 200px;
   width: 318px;
-  border: 1px solid red;
 }
 @media screen and (max-width: 767px) {
   .footer {
