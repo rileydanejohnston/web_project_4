@@ -6,7 +6,7 @@
   position: fixed;
   top: calc(50% - 215px);
   left: calc(50% - 165px);
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15); /* ??? i don't see a difference but okay */
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   display: none;
 }
 

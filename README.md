@@ -1,11 +1,14 @@
 # Around The U.S.
 ------------------------
 
+## URL
+------------------------
+
+
 ## Description
 ------------------------
-_"Around The U.S." allows a user to create a profile and customize a profile page. The project uses HTML and CSS to display their profile information as well as six destination cards. The project also JavaScript to process the user's profile information which is entered via a form._
+_"Around The U.S." is a single page website that has a profile section and six destination cards. CSS is used to make the site responsive when it's viewed on different screen sizes. JavaScript is used to handle some basic input procedures and HTML manipulations. When the user clicks the edit button, a form will appear allowing the user to update their profile information. The form will disappear when the user clicks the save/close buttons. The user also has the ability to like the destination cards._
 
 ## Future Features
 ------------------------
-1. Liking photos
-2. Add and delete photos
+1. Add and delete photos

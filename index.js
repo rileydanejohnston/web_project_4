@@ -1,14 +1,10 @@
 let rootContainer = document.querySelector('.root');
 let pageContainer = rootContainer.querySelector('.page');
-let form = pageContainer.querySelector('.popup__form');
+let form = rootContainer.querySelector('.popup__form');
 
 let likeBtn = pageContainer.querySelectorAll('.cards__like-button');
 let editBtn = pageContainer.querySelector('.profile__edit-button');
-let closeBtn = pageContainer.querySelector('.popup__close');
-
-
-
-
+let closeBtn = rootContainer.querySelector('.popup__close');
 
 /*************************************************************/
 /*************************************************************/
@@ -27,10 +23,11 @@ for (let i = 0; i < likeBtn.length; ++i)
 
 // Popup Form
 function togglePopup(){
-  let popupContainer = pageContainer.querySelector('.popup');
+  let popupContainer = rootContainer.querySelector('.popup');
+  let overlay = rootContainer.querySelector('#overlay');
   
   popupContainer.classList.toggle('popup_active');
-  rootContainer.classList.toggle('root_overlay');
+  overlay.classList.toggle('overlay');
 }
 editBtn.addEventListener("click", togglePopup);
 closeBtn.addEventListener("click", togglePopup);
@@ -40,8 +37,8 @@ function updateProfile(e){
 
   let profileName = pageContainer.querySelector('.profile__name');
   let profileAbout = pageContainer.querySelector('.profile__about');
-  let popupName = pageContainer.querySelector('.popup__name');
-  let popupAbout = pageContainer.querySelector('.popup__about');
+  let popupName = rootContainer.querySelector('.popup__name');
+  let popupAbout = rootContainer.querySelector('.popup__about');
 
   profileName.textContent = popupName.value;
   profileAbout.textContent = popupAbout.value;
@@ -52,5 +49,4 @@ function updateProfile(e){
   togglePopup();
   e.preventDefault();
 }
-//saveBtn.addEventListener("click", updateProfile);
 form.addEventListener("submit", updateProfile);
