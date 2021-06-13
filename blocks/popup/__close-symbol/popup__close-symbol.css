@@ -1,0 +1,6 @@
+.popup__close-symbol {
+}
+.popup__close-symbol:hover {
+  opacity: .6;
+  transition: opacity .3s linear;
+}
