@@ -10,30 +10,23 @@
 <body class="root">
   <div id="overlay">
     <div class="page">
-      <!--
       <header class="header">
         <img class="logo" src="images/header-image.svg" alt="Around The U.S.">
       </header>
       <main class="main">
-        -->
         <section class="profile">
           <div class="profile__avatar"></div>
           <div class="profile__info-container">
             <div class="profile__info">
               <div class="profile__name-button">
                 <p class="profile__name">Jacques Cousteau</p>
-                <button class="profile__edit-button">
-                  <div class="profile__edit-symbol"></div>
-                </button>
+                <button class="profile__edit-button profile__edit-button_image" type="button"></button>
               </div>
               <p class="profile__about">Explorer</p>
             </div>
-            <button class="profile__add-button">
-              <img class="profile__add-symbol" src="./images/addition-symbol.svg" alt="Addition symbol">
-            </button>
+            <button class="profile__add-button" type="button"></button>
           </div>
         </section>
-        <!--
         <section class="locations">
           <ul class="cards">
             <li class="cards__item">
@@ -41,7 +34,7 @@
               <div class="cards__label">
                 <div class="cards__name-container">
                   <p class="cards__name">Albuquerque</p>
-                  <div class="cards__like-button"></div>
+                  <button class="cards__like-button" type="button"></button>
                 </div>
               </div>
             </li>
@@ -50,7 +43,7 @@
               <div class="cards__label">
                 <div class="cards__name-container">
                   <p class="cards__name">Austin</p>
-                  <div class="cards__like-button"></div>
+                  <button class="cards__like-button" type="button"></button>
                 </div>
               </div>
             </li>
@@ -59,7 +52,7 @@
               <div class="cards__label">
                 <div class="cards__name-container">
                   <p class="cards__name">Charleston</p>
-                  <div class="cards__like-button"></div>
+                  <button class="cards__like-button" type="button"></button>
                 </div>
               </div>
             </li>
@@ -68,7 +61,7 @@
               <div class="cards__label">
                 <div class="cards__name-container">
                   <p class="cards__name">Kansas City</p>
-                  <div class="cards__like-button"></div>
+                  <button class="cards__like-button" type="button"></button>
                 </div>
               </div>
             </li>
@@ -77,7 +70,7 @@
               <div class="cards__label">
                 <div class="cards__name-container">
                   <p class="cards__name">Los Angeles</p>
-                  <div class="cards__like-button"></div>
+                  <button class="cards__like-button" type="button"></button>
                 </div>
               </div>
             </li>
@@ -86,7 +79,7 @@
               <div class="cards__label">
                 <div class="cards__name-container">
                   <p class="cards__name">St. Paul</p>
-                  <div class="cards__like-button"></div>
+                  <button class="cards__like-button" type="button"></button>
                 </div>
               </div>
             </li>
@@ -96,7 +89,6 @@
       <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
       </footer>
-      -->
     </div>
   </div>
   <section class="popup">
@@ -104,11 +96,9 @@
       <h2 class="popup__title">Edit profile</h2>
       <input class="popup__name" type="text" placeholder="Jacques Cousteau" name="name">
       <input class="popup__about" type="text" placeholder="Explorer" name="about">
-      <input class="popup__submit" type="submit" value="Save" name="submit">
+      <button class="popup__submit" type="submit" name="submit">Save</button>
     </form>
-    <button class="popup__close">
-      <img class="popup__close-symbol" src="./images/close-symbol.svg" alt="Close symbol 'X'">
-    </button>
+    <button class="popup__close" type="button"></button>
   </section>
   <script src="./index.js"></script>
 </body>

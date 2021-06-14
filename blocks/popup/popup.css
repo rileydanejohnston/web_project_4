@@ -10,7 +10,7 @@
   display: none;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 625px){
   .popup {
     width: 282px;
     height: 322px;

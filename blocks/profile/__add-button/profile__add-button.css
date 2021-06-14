@@ -5,14 +5,20 @@
   border-radius: 2px;
   box-sizing: border-box;
   background-color: #000000;
+  background-image: url("../../../images/addition-symbol.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 22px;
 }
 .profile__add-button:hover {
   opacity: .6;
   transition: opacity .3s linear;
+  cursor: pointer;
 }
 @media screen and (max-width: 1100px) {
   .profile__add-button {
     margin: 36px auto 0 auto;
     width: 282px;
+    background-size: 16px;
   }
 }
