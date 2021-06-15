@@ -8,7 +8,7 @@
     justify-content: center;
   }
 }
-@media screen and (max-width: 767px){
+@media screen and (max-width: 625px){
   .profile__name-button {
     width: 224px;
   }

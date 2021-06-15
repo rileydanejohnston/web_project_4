@@ -1,7 +1,6 @@
 .profile {
   color: #FFFFFF;
   width: 68.75%;
-  min-height: 120px;
   margin: 40px auto 0 auto;
   display: flex;
 }
@@ -11,7 +10,7 @@
     margin-top: 42px;
   }
 }
-@media screen and (max-width: 767px){
+@media screen and (max-width: 625px){
   .profile {
     width: 282px;
   }
