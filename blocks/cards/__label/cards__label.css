@@ -5,6 +5,12 @@
   border-radius: 0 0 10px 10px;
   transform: translate(0, -3px);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
+
+/* this is cards__name-container
+width: 246px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between; */
