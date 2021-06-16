@@ -4,11 +4,7 @@
   border: 2px solid #FFFFFF;
   border-radius: 2px;
   box-sizing: border-box;
-  background-color: #000000;
-  background-image: url("../../../images/addition-symbol.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 22px;
+  background: #000000 center / 22px no-repeat url("../../../images/addition-symbol.svg");
 }
 .profile__add-button:hover {
   opacity: .6;

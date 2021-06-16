@@ -6,9 +6,8 @@
   position: absolute;
   top: -48.2px;
   right: -48.2px;
-  background-color: rgba(0,0,0,0.0);
   transform: rotate(45deg);
-  background: center / contain no-repeat url('../../../images/addition-symbol.svg');
+  background: rgba(0,0,0,0.0) center / contain no-repeat url('../../../images/addition-symbol.svg');
 }
 .popup__close:hover {
   opacity: .6;
