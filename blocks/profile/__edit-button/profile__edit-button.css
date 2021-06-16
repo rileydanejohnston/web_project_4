@@ -4,7 +4,7 @@
   height: 24px;
   box-sizing: border-box;
   padding: 0;
-  background: #000000 10px / center no-repeat url('../../../images/edit-symbol.svg');
+  background: #000000 center / 10px no-repeat url('../../../images/edit-symbol.svg');
 }
 .profile__edit-button:hover {
   opacity: .6;

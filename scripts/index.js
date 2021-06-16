@@ -1,13 +1,13 @@
-let editBtn = document.querySelector('.profile__edit-button');
-let closeBtn = popup.querySelector('.popup__close');
-let saveBtn = popup.querySelector('.popup__submit');
-
 let overlay = document.querySelector('.overlay');
 let popup = document.querySelector('.popup');
 let inputName = popup.querySelector('.popup__name');
 let inputAbout = popup.querySelector('.popup__about');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
+
+let editBtn = document.querySelector('.profile__edit-button');
+let closeBtn = popup.querySelector('.popup__close');
+let saveBtn = popup.querySelector('.popup__submit');
 
 function togglePopup() {
   if (!popup.classList.contains('popup_active'))
