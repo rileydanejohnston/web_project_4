@@ -1,6 +1,7 @@
 .popup__about {
   margin-top: 29.74px;
   width: 100%;
+  padding: 0;
   height: 27.34px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -14,5 +15,6 @@
 @media screen and (max-width: 625px){
   .popup__about {
     margin-top: 30px;
+    height: 26px;
   }
 }
