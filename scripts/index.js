@@ -9,17 +9,14 @@ let closeBtn = popup.querySelector('.popup__close');
 let saveBtn = popup.querySelector('.popup__submit');
 
 function togglePopup() {
+  
   if (!popup.classList.contains('popup_active'))
   {
-    popup.classList.add('popup_active');
-
     inputName.value = profileName.textContent;
     inputAbout.value = profileAbout.textContent;
   }
-  else
-  {
-    popup.classList.remove('popup_active');
-  }
+
+  popup.classList.toggle('popup_active');
 }
 
 function updateProfile(event) {
