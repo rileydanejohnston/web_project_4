@@ -1,12 +1,13 @@
 let popup = document.querySelector('.popup');
-let inputName = popup.querySelector('.popup__name');
-let inputAbout = popup.querySelector('.popup__about');
+let form = popup.querySelector('.popup__form');
+
+let inputName = form.querySelector('.popup__name');
+let inputAbout = form.querySelector('.popup__about');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 
 let editBtn = document.querySelector('.profile__edit-button');
 let closeBtn = popup.querySelector('.popup__close');
-let saveBtn = popup.querySelector('.popup__submit');
 
 function togglePopup() {
   
@@ -31,4 +32,4 @@ function updateProfile(event) {
 
 editBtn.addEventListener('click', togglePopup);
 closeBtn.addEventListener('click', togglePopup);
-saveBtn.addEventListener('click', updateProfile);
+form.addEventListener('submit', updateProfile);
