@@ -1,4 +1,3 @@
-let overlay = document.querySelector('.overlay');
 let popup = document.querySelector('.popup');
 let inputName = popup.querySelector('.popup__name');
 let inputAbout = popup.querySelector('.popup__about');
@@ -12,7 +11,6 @@ let saveBtn = popup.querySelector('.popup__submit');
 function togglePopup() {
   if (!popup.classList.contains('popup_active'))
   {
-    overlay.classList.add('overlay_active');
     popup.classList.add('popup_active');
 
     inputName.value = profileName.textContent;
@@ -20,7 +18,6 @@ function togglePopup() {
   }
   else
   {
-    overlay.classList.remove('overlay_active');
     popup.classList.remove('popup_active');
   }
 }
