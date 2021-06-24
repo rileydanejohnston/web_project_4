@@ -6,6 +6,7 @@ let inputAbout = form.querySelector('.popup__about');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 
+const likeBtn = document.querySelectorAll('.cards__like-button');
 let editBtn = document.querySelector('.profile__edit-button');
 let closeBtn = popup.querySelector('.popup__close');
 
@@ -29,6 +30,12 @@ function updateProfile(event) {
   togglePopup();
 }
 
+
+// iterate through like buttons
+for (let i = 0; i < likeBtn.length; ++i)
+{
+  likeBtn[i].addEventListener('click', (evt) => evt.target.classList.toggle('cards__like-button_active'));
+}
 
 editBtn.addEventListener('click', togglePopup);
 closeBtn.addEventListener('click', togglePopup);
