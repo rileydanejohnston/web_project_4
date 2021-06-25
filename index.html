@@ -35,7 +35,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
     </footer>
-    <div class="popup">
+    <div class="popup" id="editProfile">
       <div class="popup__container">
         <button class="popup__close" type="button"></button>
         <form class="popup__form" method="POST" name="form">
@@ -43,6 +43,17 @@
           <input class="popup__name" type="text" placeholder="Name" name="name">
           <input class="popup__about" type="text" placeholder="About" name="about">
           <button class="popup__submit" type="submit" name="submit">Save</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup" id="newPlace">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <form class="popup__form" method="POST" name="form">
+          <h3 class="popup__title">New place</h3>
+          <input class="popup__name" type="text" placeholder="Title" name="title">
+          <input class="popup__about" type="text" placeholder="Image link" name="link">
+          <button class="popup__submit" type="submit" name="submit">Create</button>
         </form>
       </div>
     </div>

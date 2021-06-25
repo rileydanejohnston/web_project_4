@@ -1,14 +1,20 @@
-let popup = document.querySelector('.popup');
-let form = popup.querySelector('.popup__form');
+let profilePopup = document.querySelector('#editProfile');
+let newPlacePopup = document.querySelector('#newPlace');
+let profileForm = profilePopup.querySelector('.popup__form');
+let newPlaceForm = newPlacePopup.querySelector('.popup__form');
 
-let inputName = form.querySelector('.popup__name');
-let inputAbout = form.querySelector('.popup__about');
+let inputName = profileForm.querySelector('.popup__name');
+let inputAbout = profileForm.querySelector('.popup__about');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
+let newPlaceTitle = newPlaceForm.querySelector('.popup__name');
+let newPlaceLink = newPlaceForm.querySelector('.popup__about');
 
-const likeBtn = document.querySelectorAll('.cards__like-button');
+let addBtn = document.querySelector('.profile__add-button');
+let likeBtn = document.querySelectorAll('.cards__like-button');
 let editBtn = document.querySelector('.profile__edit-button');
-let closeBtn = popup.querySelector('.popup__close');
+let profileCloseBtn = profilePopup.querySelector('.popup__close');
+let newPlaceCloseBtn = newPlacePopup.querySelector('.popup__close');
 
 const initialCards = [
   {
@@ -37,15 +43,24 @@ const initialCards = [
   },
 ];
 
+function toggleNewPlacePopup() {
+  newPlacePopup.classList.toggle('popup_active');
+}
 
-function togglePopup() {
-  if (!popup.classList.contains('popup_active'))
+function createCard(event) {
+  event.preventDefault();
+  addCard(newPlaceTitle.value, newPlaceLink.value);
+  toggleNewPlacePopup();
+}
+
+function toggleProfilePopup() {
+  if (!profilePopup.classList.contains('popup_active'))
   {
     inputName.value = profileName.textContent;
     inputAbout.value = profileAbout.textContent;
   }
 
-  popup.classList.toggle('popup_active');
+  profilePopup.classList.toggle('popup_active');
 }
 
 
@@ -55,7 +70,7 @@ function updateProfile(event) {
   profileName.textContent = inputName.value; 
   profileAbout.textContent = inputAbout.value;
 
-  togglePopup();
+  toggleProfilePopup();
 }
 
 
@@ -77,9 +92,12 @@ const addCard = function(name, link){
   cardList.prepend(newCard);
 }
 
-editBtn.addEventListener('click', togglePopup);
-closeBtn.addEventListener('click', togglePopup);
-form.addEventListener('submit', updateProfile);
+addBtn.addEventListener('click', toggleNewPlacePopup);
+editBtn.addEventListener('click', toggleProfilePopup);
+profileCloseBtn.addEventListener('click', toggleProfilePopup);
+newPlaceCloseBtn.addEventListener('click', toggleNewPlacePopup);
+profileForm.addEventListener('submit', updateProfile);
+newPlaceForm.addEventListener('submit', createCard);
 // not sure how the best way to do this is.
 // 1. pass array of link/name to addCard
 // 2. pass link & name as individual values
