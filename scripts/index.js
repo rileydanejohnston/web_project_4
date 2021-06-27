@@ -47,9 +47,10 @@ const initialCards = [
   },
 ];
 
-/******************************************************************************************/
-/******************************************************************************************/
+/***********************************************************/
 // toggle popup functions
+/***********************************************************/
+
 function toggleNewPlacePopup() {
   newPlacePopup.classList.toggle('popup_active');
 }
@@ -65,9 +66,10 @@ function toggleProfilePopup() {
   profilePopup.classList.toggle('popup_active');
 }
 
-/******************************************************************************************/
-/******************************************************************************************/
+/***********************************************************/
 // update profile
+/***********************************************************/
+
 
 function updateProfile(event) {
   event.preventDefault();
@@ -78,10 +80,12 @@ function updateProfile(event) {
   toggleProfilePopup();
 }
 
-/******************************************************************************************/
-/******************************************************************************************/
+/***********************************************************/
 // card functions
+/***********************************************************/
 
+
+// user clicks add card button
 const getCardInfo = (event) => {
   event.preventDefault();
 
@@ -95,7 +99,7 @@ const getCardInfo = (event) => {
   toggleNewPlacePopup();
 }
 
-
+// add initial cards & add user cards to DOM
 const addCard = (cardName, cardLink) => {
   const newCard = cardTemplate.querySelector('.cards__item').cloneNode(true);
 
@@ -108,11 +112,21 @@ const addCard = (cardName, cardLink) => {
   createButtonListeners(newCard);
 }
 
+// create event listener for like button, close button, picture
+const createButtonListeners = (card) => {
+  const likeBtn = card.querySelector('.cards__like-button');
+  const closeBtn = card.querySelector('.cards__close-button');
+  
+  likeBtn.addEventListener('click', (event) => event.target.classList.toggle('cards__like-button_active'));
+
+  closeBtn.addEventListener('click', () => card.remove());
+}
 
 
-/******************************************************************************************/
-/******************************************************************************************/
+/***********************************************************/
 // event handlers
+/***********************************************************/
+
 
 addBtn.addEventListener('click', toggleNewPlacePopup);
 editBtn.addEventListener('click', toggleProfilePopup);
