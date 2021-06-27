@@ -1,5 +1,6 @@
 let profilePopup = document.querySelector('#editProfile');
 let newPlacePopup = document.querySelector('#newPlace');
+let photoPopup = document.querySelector('#photo');
 
 let profileForm = profilePopup.querySelector('.popup__form');
 let newPlaceForm = newPlacePopup.querySelector('.popup__form');
@@ -13,11 +14,14 @@ let newPlaceLink = newPlaceForm.querySelector('.popup__about');
 
 const cardList = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#cardTemplate').content;
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
 
 let addBtn = document.querySelector('.profile__add-button');
 let editBtn = document.querySelector('.profile__edit-button');
 let closeProfileBtn = profilePopup.querySelector('.popup__close');
 let closeNewPlaceBtn = newPlacePopup.querySelector('.popup__close');
+const closePhotoBtn = photoPopup.querySelector('.popup__close');
 
 
 const initialCards = [
@@ -66,6 +70,9 @@ function toggleProfilePopup() {
   profilePopup.classList.toggle('popup_active');
 }
 
+function toggleCardPhoto() {
+  photoPopup.classList.toggle('popup_active');
+}
 /***********************************************************/
 // update profile
 /***********************************************************/
@@ -116,10 +123,18 @@ const addCard = (cardName, cardLink) => {
 const createButtonListeners = (card) => {
   const likeBtn = card.querySelector('.cards__like-button');
   const closeBtn = card.querySelector('.cards__close-button');
+  const pic = card.querySelector('.cards__photo');
   
   likeBtn.addEventListener('click', (event) => event.target.classList.toggle('cards__like-button_active'));
 
   closeBtn.addEventListener('click', () => card.remove());
+
+  pic.addEventListener('click', (event) => {
+    console.log(event.target);
+    popupImage.src = event.target.src;
+    popupCaption.innerHTML = event.target.alt
+    toggleCardPhoto();
+  });
 }
 
 
@@ -132,6 +147,7 @@ addBtn.addEventListener('click', toggleNewPlacePopup);
 editBtn.addEventListener('click', toggleProfilePopup);
 closeProfileBtn.addEventListener('click', toggleProfilePopup);
 closeNewPlaceBtn.addEventListener('click', toggleNewPlacePopup);
+closePhotoBtn.addEventListener('click', toggleCardPhoto);
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
