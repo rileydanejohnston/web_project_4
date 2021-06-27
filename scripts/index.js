@@ -1,5 +1,6 @@
 let profilePopup = document.querySelector('#editProfile');
 let newPlacePopup = document.querySelector('#newPlace');
+
 let profileForm = profilePopup.querySelector('.popup__form');
 let newPlaceForm = newPlacePopup.querySelector('.popup__form');
 
@@ -81,42 +82,44 @@ function updateProfile(event) {
 /******************************************************************************************/
 // card functions
 
-function createCard(event) {
+const getCardInfo = (event) => {
   event.preventDefault();
+
   addCard(newPlaceTitle.value, newPlaceLink.value);
+
+
+  newPlaceTitle.value = '';
+  newPlaceLink.value = '';
+
+
   toggleNewPlacePopup();
 }
 
-const addCard = function(name, link){
+
+const addCard = (cardName, cardLink) => {
   const newCard = cardTemplate.querySelector('.cards__item').cloneNode(true);
+
+  newCard.querySelector('.cards__name').textContent = cardName;
+  newCard.querySelector('.cards__photo').alt = cardName; // user photos?
+  newCard.querySelector('.cards__photo').src = cardLink;
 
   cardList.prepend(newCard);
 
-  newCard.querySelector('.cards__name').textContent = name;
-  newCard.querySelector('.cards__photo').alt = name; // user photos?
-  newCard.querySelector('.cards__photo').src = link;
+  createButtonListeners(newCard);
 }
+
+
+
+/******************************************************************************************/
+/******************************************************************************************/
+// event handlers
 
 addBtn.addEventListener('click', toggleNewPlacePopup);
 editBtn.addEventListener('click', toggleProfilePopup);
 closeProfileBtn.addEventListener('click', toggleProfilePopup);
 closeNewPlaceBtn.addEventListener('click', toggleNewPlacePopup);
+
 profileForm.addEventListener('submit', updateProfile);
-newPlaceForm.addEventListener('submit', createCard);
-// not sure how the best way to do this is.
-// 1. pass array of link/name to addCard
-// 2. pass link & name as individual values
-// how will the form be handled?
-document.addEventListener('onload', initialCards.forEach(function(item) {
-  const name = item.name;
-  const link = item.link;
-  addCard(name, link);
-}));
+newPlaceForm.addEventListener('submit', getCardInfo);
 
-
-for (let i = 0; i < likeBtn.length; ++i)
-{
-  likeBtn[i].addEventListener('click', (evt) => evt.target.classList.toggle('cards__like-button_active'));
-
-  deleteBtn[i].addEventListener('click', (evt) => console.log(evt.target));
-}
+initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
