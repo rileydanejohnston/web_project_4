@@ -10,11 +10,14 @@ let profileAbout = document.querySelector('.profile__about');
 let newPlaceTitle = newPlaceForm.querySelector('.popup__name');
 let newPlaceLink = newPlaceForm.querySelector('.popup__about');
 
+const cardList = document.querySelector('.cards');
+const cardTemplate = document.querySelector('#cardTemplate').content;
+
 let addBtn = document.querySelector('.profile__add-button');
-let likeBtn = document.querySelectorAll('.cards__like-button');
 let editBtn = document.querySelector('.profile__edit-button');
-let profileCloseBtn = profilePopup.querySelector('.popup__close');
-let newPlaceCloseBtn = newPlacePopup.querySelector('.popup__close');
+let closeProfileBtn = profilePopup.querySelector('.popup__close');
+let closeNewPlaceBtn = newPlacePopup.querySelector('.popup__close');
+
 
 const initialCards = [
   {
@@ -43,15 +46,13 @@ const initialCards = [
   },
 ];
 
+/******************************************************************************************/
+/******************************************************************************************/
+// toggle popup functions
 function toggleNewPlacePopup() {
   newPlacePopup.classList.toggle('popup_active');
 }
 
-function createCard(event) {
-  event.preventDefault();
-  addCard(newPlaceTitle.value, newPlaceLink.value);
-  toggleNewPlacePopup();
-}
 
 function toggleProfilePopup() {
   if (!profilePopup.classList.contains('popup_active'))
@@ -63,6 +64,9 @@ function toggleProfilePopup() {
   profilePopup.classList.toggle('popup_active');
 }
 
+/******************************************************************************************/
+/******************************************************************************************/
+// update profile
 
 function updateProfile(event) {
   event.preventDefault();
@@ -73,29 +77,30 @@ function updateProfile(event) {
   toggleProfilePopup();
 }
 
+/******************************************************************************************/
+/******************************************************************************************/
+// card functions
 
-// iterate through like buttons
-for (let i = 0; i < likeBtn.length; ++i)
-{
-  likeBtn[i].addEventListener('click', (evt) => evt.target.classList.toggle('cards__like-button_active'));
+function createCard(event) {
+  event.preventDefault();
+  addCard(newPlaceTitle.value, newPlaceLink.value);
+  toggleNewPlacePopup();
 }
 
 const addCard = function(name, link){
-  const cardList = document.querySelector('.cards');
-  const cardTemplate = document.querySelector('#cardTemplate').content;
   const newCard = cardTemplate.querySelector('.cards__item').cloneNode(true);
+
+  cardList.prepend(newCard);
 
   newCard.querySelector('.cards__name').textContent = name;
   newCard.querySelector('.cards__photo').alt = name; // user photos?
   newCard.querySelector('.cards__photo').src = link;
-  
-  cardList.prepend(newCard);
 }
 
 addBtn.addEventListener('click', toggleNewPlacePopup);
 editBtn.addEventListener('click', toggleProfilePopup);
-profileCloseBtn.addEventListener('click', toggleProfilePopup);
-newPlaceCloseBtn.addEventListener('click', toggleNewPlacePopup);
+closeProfileBtn.addEventListener('click', toggleProfilePopup);
+closeNewPlaceBtn.addEventListener('click', toggleNewPlacePopup);
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', createCard);
 // not sure how the best way to do this is.
@@ -107,3 +112,11 @@ document.addEventListener('onload', initialCards.forEach(function(item) {
   const link = item.link;
   addCard(name, link);
 }));
+
+
+for (let i = 0; i < likeBtn.length; ++i)
+{
+  likeBtn[i].addEventListener('click', (evt) => evt.target.classList.toggle('cards__like-button_active'));
+
+  deleteBtn[i].addEventListener('click', (evt) => console.log(evt.target));
+}
