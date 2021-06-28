@@ -1,12 +1,9 @@
 # Around The U.S.
-------------------------
 
 ## URL
-------------------------
 [Around The U.S.](https://rileydanejohnston.github.io/web_project_4/)
 
 ## Description
-------------------------
 _"Around The U.S." is a single page website that has an editible profile section and a cards section. The cards section starts with 6 intial cards. The user has the ability to add and delete cards as they see fit_
 
 ## Techniques
@@ -17,7 +14,6 @@ _The user also can manipulate how many places appear on their page. Click the bu
 _Each place card can be 'liked' and each photo can be enlarged. Click the heart symbol in the lower right corner of each place card to like the place. Click the place card's photo to increase it's size._
 
 ## Technologies
-------------------------
 _CSS is used to make the site responsive when it's viewed on different screen sizes._
 
 _JavaScript is used to handle some basic input procedures and HTML manipulations. When the user clicks the edit button, a form will appear allowing the user to update their profile information. The form will disappear when the user clicks the save/close buttons._
@@ -31,5 +27,4 @@ _The like button's appearance changes from white to black after being clicked. A
 _Each photo increases size and moves to the center of the screen after being clicked. The image and caption are in a popup container similar to the add card/edit profile form popups. JavaScript determines which card is clicked then populates the popup with the card's image and city name._
 
 ## Future Features
-------------------------
 1. Create an account so users can save their profiles & cards
