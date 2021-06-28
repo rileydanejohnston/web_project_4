@@ -111,7 +111,7 @@ const addCard = (cardName, cardLink) => {
   const newCard = cardTemplate.querySelector('.cards__item').cloneNode(true);
 
   newCard.querySelector('.cards__name').textContent = cardName;
-  newCard.querySelector('.cards__photo').alt = cardName; // user photos?
+  newCard.querySelector('.cards__photo').alt = cardName;
   newCard.querySelector('.cards__photo').src = cardLink;
 
   cardList.prepend(newCard);
@@ -132,6 +132,7 @@ const createButtonListeners = (card) => {
   pic.addEventListener('click', (event) => {
     console.log(event.target);
     popupImage.src = event.target.src;
+    popupImage.alt = event.target.alt;
     popupCaption.innerHTML = event.target.alt
     toggleCardPhoto();
   });
