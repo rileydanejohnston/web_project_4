@@ -52,27 +52,20 @@ const initialCards = [
 ];
 
 /***********************************************************/
-// toggle popup functions
+// toggle popup function
 /***********************************************************/
 
-function toggleNewPlacePopup() {
-  newPlacePopup.classList.toggle('popup_active');
-}
 
-
-function toggleProfilePopup() {
-  if (!profilePopup.classList.contains('popup_active'))
+function togglePopup(modal) {
+  if ((modal.id === 'editProfile') && (!modal.classList.contains('popup_active')))
   {
     inputName.value = profileName.textContent;
     inputAbout.value = profileAbout.textContent;
   }
 
-  profilePopup.classList.toggle('popup_active');
+  modal.classList.toggle('popup_active');
 }
 
-function toggleCardPhoto() {
-  photoPopup.classList.toggle('popup_active');
-}
 /***********************************************************/
 // update profile
 /***********************************************************/
@@ -84,7 +77,7 @@ function updateProfile(event) {
   profileName.textContent = inputName.value; 
   profileAbout.textContent = inputAbout.value;
 
-  toggleProfilePopup();
+  togglePopup(profilePopup);
 }
 
 /***********************************************************/
@@ -103,7 +96,7 @@ const getCardInfo = (event) => {
   newPlaceLink.value = '';
 
 
-  toggleNewPlacePopup();
+  togglePopup(newPlace);
 }
 
 // add initial cards & add user cards to DOM
@@ -130,11 +123,10 @@ const createButtonListeners = (card) => {
   closeBtn.addEventListener('click', () => card.remove());
 
   pic.addEventListener('click', (event) => {
-    console.log(event.target);
     popupImage.src = event.target.src;
     popupImage.alt = event.target.alt;
     popupCaption.textContent = event.target.alt
-    toggleCardPhoto();
+    togglePopup(photoPopup);
   });
 }
 
@@ -144,11 +136,11 @@ const createButtonListeners = (card) => {
 /***********************************************************/
 
 
-addBtn.addEventListener('click', toggleNewPlacePopup);
-editBtn.addEventListener('click', toggleProfilePopup);
-closeProfileBtn.addEventListener('click', toggleProfilePopup);
-closeNewPlaceBtn.addEventListener('click', toggleNewPlacePopup);
-closePhotoBtn.addEventListener('click', toggleCardPhoto);
+addBtn.addEventListener('click', () => togglePopup(newPlace));
+editBtn.addEventListener('click', () => togglePopup(profilePopup));
+closeProfileBtn.addEventListener('click', () => togglePopup(profilePopup));
+closeNewPlaceBtn.addEventListener('click', () => togglePopup(newPlace));
+closePhotoBtn.addEventListener('click', () => togglePopup(photoPopup));
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
