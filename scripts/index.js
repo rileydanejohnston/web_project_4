@@ -1,26 +1,26 @@
-let profilePopup = document.querySelector('#editProfile');
-let newPlacePopup = document.querySelector('#newPlace');
-let photoPopup = document.querySelector('#photo');
+const profilePopup = document.querySelector('#editProfile');
+const newPlacePopup = document.querySelector('#newPlace');
+const photoPopup = document.querySelector('#photo');
 
-let profileForm = profilePopup.querySelector('.popup__form');
-let newPlaceForm = newPlacePopup.querySelector('.popup__form');
+const profileForm = profilePopup.querySelector('.popup__form');
+const newPlaceForm = newPlacePopup.querySelector('.popup__form');
 
-let inputName = profileForm.querySelector('.popup__name');
-let inputAbout = profileForm.querySelector('.popup__about');
-let profileName = document.querySelector('.profile__name');
-let profileAbout = document.querySelector('.profile__about');
-let newPlaceTitle = newPlaceForm.querySelector('.popup__name');
-let newPlaceLink = newPlaceForm.querySelector('.popup__about');
+const inputName = profileForm.querySelector('.popup__name');
+const inputAbout = profileForm.querySelector('.popup__about');
+const profileName = document.querySelector('.profile__name');
+const profileAbout = document.querySelector('.profile__about');
+const newPlaceTitle = newPlaceForm.querySelector('.popup__name');
+const newPlaceLink = newPlaceForm.querySelector('.popup__about');
 
 const cardList = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#cardTemplate').content;
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
-let addBtn = document.querySelector('.profile__add-button');
-let editBtn = document.querySelector('.profile__edit-button');
-let closeProfileBtn = profilePopup.querySelector('.popup__close');
-let closeNewPlaceBtn = newPlacePopup.querySelector('.popup__close');
+const addBtn = document.querySelector('.profile__add-button');
+const editBtn = document.querySelector('.profile__edit-button');
+const closeProfileBtn = profilePopup.querySelector('.popup__close');
+const closeNewPlaceBtn = newPlacePopup.querySelector('.popup__close');
 const closePhotoBtn = photoPopup.querySelector('.popup__close');
 
 
