@@ -133,7 +133,7 @@ const createButtonListeners = (card) => {
     console.log(event.target);
     popupImage.src = event.target.src;
     popupImage.alt = event.target.alt;
-    popupCaption.innerHTML = event.target.alt
+    popupCaption.textContent = event.target.alt
     toggleCardPhoto();
   });
 }
