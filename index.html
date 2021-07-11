@@ -37,11 +37,13 @@
     <div class="popup" id="editProfile">
       <div class="popup__container">
         <button class="popup__close" type="button"></button>
-        <form class="popup__form" method="POST" name="form">
+        <form class="popup__form" method="POST" name="form" novalidate>
           <h3 class="popup__title">Edit profile</h3>
-          <input class="popup__name" type="text" placeholder="Name" name="name">
-          <input class="popup__about" type="text" placeholder="About" name="about">
-          <button class="popup__submit" type="submit" name="submit">Save</button>
+          <input class="popup__name" id="profile-name" type="text" placeholder="Name" name="name" minlength="2" maxlength="40" required>
+          <span class="popup__error" id="profile-name-error"></span>
+          <input class="popup__about" id="profile-about" type="text" placeholder="About" name="about" required>
+          <span class="popup__error" id="profile-about-error"></span>
+          <button class="popup__submit" id="profile-submit" type="submit" name="submit">Save</button>
         </form>
       </div>
     </div>
