@@ -1,3 +1,17 @@
+const checkValidity = (element, settings) => {
+  const error = document.querySelector(`#${element.id}-error`);
+
+  if (!element.validity.valid){
+    element.classList.add(settings.inputErrorClass);
+    error.classList.add(settings.errorClass);
+    error.textContent = element.validationMessage;
+  }
+  else {
+    element.classList.remove(settings.inputErrorClass);
+    error.textContent = '';
+  }
+};
+
 const validateElements = (form, elements, settings) => {
   // iterate through input elements
   elements.forEach(element => {
