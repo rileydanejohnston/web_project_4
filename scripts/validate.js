@@ -1,4 +1,20 @@
-const checkValidity = (element, settings) => {
+const toggleButton = (form, elements, settings) => {
+  const button = form.querySelector('.popup__submit');
+  const validElements = elements.every(element => element.validity.valid);
+
+  if (validElements){
+    button.classList.remove(settings.inactiveButtonClass);
+    button.removeAttribute('disabled', false);
+  }
+  else {
+    button.classList.add(settings.inactiveButtonClass);
+    button.setAttribute('disabled', true);
+  }
+};
+
+
+
+const checkValidity = (form, element, settings) => {
   const error = document.querySelector(`#${element.id}-error`);
 
   if (!element.validity.valid){
@@ -12,13 +28,16 @@ const checkValidity = (element, settings) => {
   }
 };
 
+
+
 const validateElements = (form, elements, settings) => {
   // iterate through input elements
   elements.forEach(element => {
     element.addEventListener('input', () => {
       // check validity of each element
       // depending on validity, call certain functions
-      checkValidity(element, settings);
+      checkValidity(form, element, settings);
+      toggleButton(form, elements, settings);
     });
   });
 };
