@@ -1,3 +1,16 @@
+const validateElements = (form, elements, settings) => {
+  // iterate through input elements
+  elements.forEach(element => {
+    element.addEventListener('input', () => {
+      // check validity of each element
+      // depending on validity, call certain functions
+      checkValidity(element, settings);
+    });
+  });
+};
+
+
+
 const enableValidation = settings => {
   // select all forms
   const forms = Array.from(document.querySelectorAll(settings.formSelector));
@@ -7,7 +20,7 @@ const enableValidation = settings => {
 
     const elements = Array.from(document.querySelectorAll(settings.inputSelector));
 
-    validateElements(elements);
+    validateElements(form, elements, settings);
   });
 };
 
