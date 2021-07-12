@@ -130,6 +130,15 @@ const createButtonListeners = (card) => {
   });
 }
 
+const closePopupEsc = (e) => {
+  if (e.key === 'Escape' && profilePopup.classList.contains('popup_active')){
+    togglePopup(profilePopup);
+  }
+  else if (e.key === 'Escape' && newPlacePopup.classList.contains('popup_active')){
+    togglePopup(newPlacePopup);
+  }
+};
+
 
 /***********************************************************/
 // event handlers
@@ -144,5 +153,7 @@ closePhotoBtn.addEventListener('click', () => togglePopup(photoPopup));
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
+
+document.addEventListener('keydown', closePopupEsc);
 
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
