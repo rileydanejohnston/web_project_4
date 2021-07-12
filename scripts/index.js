@@ -137,6 +137,9 @@ const closePopupEsc = (e) => {
   else if (e.key === 'Escape' && newPlacePopup.classList.contains('popup_active')){
     togglePopup(newPlacePopup);
   }
+  else if (e.key === 'Escape' && photoPopup.classList.contains('popup_active')){
+    togglePopup(photoPopup);
+  }
 };
 
 
