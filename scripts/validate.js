@@ -1,6 +1,8 @@
-const toggleButton = (form, elements, settings) => {
+const toggleButton = (form, inputs, settings) => {
   const button = form.querySelector('.popup__submit');
-  const validElements = elements.every(element => element.validity.valid);
+  const validElements = inputs.every(input => input.validity.valid === true);
+
+  
 
   if (validElements){
     button.classList.remove(settings.inactiveButtonClass);
@@ -51,7 +53,7 @@ const enableValidation = settings => {
   forms.forEach(form => {
     form.addEventListener('submit', e => e.preventDefault());
 
-    const elements = Array.from(document.querySelectorAll(settings.inputSelector));
+    const elements = Array.from(form.querySelectorAll(settings.inputSelector));
 
     validateElements(form, elements, settings);
   });
