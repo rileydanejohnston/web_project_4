@@ -1,3 +1,8 @@
+const resetValidation = (btn) => {
+  btn.classList.add(settings.inactiveButtonClass);
+  btn.setAttribute('disabled', true);
+};
+
 const toggleButton = (form, inputs, settings) => {
   const button = form.querySelector('.popup__submit');
   const validElements = inputs.every(input => input.validity.valid === true);
@@ -9,8 +14,7 @@ const toggleButton = (form, inputs, settings) => {
     button.removeAttribute('disabled', false);
   }
   else {
-    button.classList.add(settings.inactiveButtonClass);
-    button.setAttribute('disabled', true);
+    resetValidation(button);
   }
 };
 
