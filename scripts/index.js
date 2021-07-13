@@ -142,6 +142,12 @@ const closePopupEsc = (e) => {
   }
 };
 
+const closePopupOverlay = (e) => {
+  if (e.target.classList.contains('popup_active')){
+    e.target.addEventListener('click', togglePopup(e.target));
+  }
+};
+
 
 /***********************************************************/
 // event handlers
@@ -158,5 +164,6 @@ profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
 
 document.addEventListener('keydown', closePopupEsc);
+document.addEventListener('click', closePopupOverlay);
 
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
