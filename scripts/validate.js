@@ -1,21 +1,36 @@
-const resetValidation = (btn) => {
-  btn.classList.add(settings.inactiveButtonClass);
+const resetValidation = (btn, inactiveButtonClass) => {
+  btn.classList.add(inactiveButtonClass);
   btn.setAttribute('disabled', true);
 };
+
+
 
 const toggleButton = (form, inputs, settings) => {
   const button = form.querySelector('.popup__submit');
   const validElements = inputs.every(input => input.validity.valid === true);
-
-  
 
   if (validElements){
     button.classList.remove(settings.inactiveButtonClass);
     button.removeAttribute('disabled', false);
   }
   else {
-    resetValidation(button);
+    resetValidation(button, settings.inactiveButtonClass);
   }
+};
+
+
+
+const showError = (element, error, inputErrorClass, errorClass) => {
+  element.classList.add(inputErrorClass);
+  error.classList.add(errorClass);
+  error.textContent = element.validationMessage;
+};
+
+
+
+const hideError = (element, error, inputErrorClass) => {
+  element.classList.remove(inputErrorClass);
+  error.textContent = '';
 };
 
 
@@ -24,13 +39,10 @@ const checkValidity = (form, element, settings) => {
   const error = document.querySelector(`#${element.id}-error`);
 
   if (!element.validity.valid){
-    element.classList.add(settings.inputErrorClass);
-    error.classList.add(settings.errorClass);
-    error.textContent = element.validationMessage;
+    showError(element, error, settings.inputErrorClass, settings.errorClass);
   }
   else {
-    element.classList.remove(settings.inputErrorClass);
-    error.textContent = '';
+    hideError(element, error, settings.inputErrorClass);
   }
 };
 
@@ -63,9 +75,8 @@ const enableValidation = settings => {
   });
 };
 
-/***********************************************************************
-                    CALL VALIDATION FUNCTION
-************************************************************************/
+
+
 enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
