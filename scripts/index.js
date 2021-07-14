@@ -52,19 +52,18 @@ const initialCards = [
 ];
 
 /***********************************************************/
-// toggle popup function
+// open & close popup functions
 /***********************************************************/
 
+const openPopup = (modal) => {
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
+  modal.classList.add('popup_active');
+};
 
-function togglePopup(modal) {
-  if ((modal.id === 'editProfile') && (!modal.classList.contains('popup_active')))
-  {
-    inputName.value = profileName.textContent;
-    inputAbout.value = profileAbout.textContent;
-  }
-
-  modal.classList.toggle('popup_active');
-}
+const closePopup = (modal) => {
+  modal.classList.remove('popup_active');
+};
 
 /***********************************************************/
 // update profile
@@ -77,7 +76,7 @@ function updateProfile(event) {
   profileName.textContent = inputName.value; 
   profileAbout.textContent = inputAbout.value;
 
-  togglePopup(profilePopup);
+  openPopup(profilePopup);
 }
 
 /***********************************************************/
@@ -96,7 +95,7 @@ const getCardInfo = (event) => {
   newPlaceLink.value = '';
 
 
-  togglePopup(newPlace);
+  openPopup(newPlace);
 }
 
 // add initial cards & add user cards to DOM
@@ -126,25 +125,25 @@ const createButtonListeners = (card) => {
     popupImage.src = event.target.src;
     popupImage.alt = event.target.alt;
     popupCaption.textContent = event.target.alt
-    togglePopup(photoPopup);
+    openPopup(photoPopup);
   });
 }
 
 const closePopupEsc = (e) => {
   if (e.key === 'Escape' && profilePopup.classList.contains('popup_active')){
-    togglePopup(profilePopup);
+    closePopup(profilePopup);
   }
   else if (e.key === 'Escape' && newPlacePopup.classList.contains('popup_active')){
-    togglePopup(newPlacePopup);
+    closePopup(newPlacePopup);
   }
   else if (e.key === 'Escape' && photoPopup.classList.contains('popup_active')){
-    togglePopup(photoPopup);
+    closePopup(photoPopup);
   }
 };
 
 const closePopupOverlay = (e) => {
   if (e.target.classList.contains('popup_active')){
-    e.target.addEventListener('click', togglePopup(e.target));
+    e.target.addEventListener('click', closePopup(e.target));
   }
 };
 
@@ -154,11 +153,11 @@ const closePopupOverlay = (e) => {
 /***********************************************************/
 
 
-addBtn.addEventListener('click', () => togglePopup(newPlace));
-editBtn.addEventListener('click', () => togglePopup(profilePopup));
-closeProfileBtn.addEventListener('click', () => togglePopup(profilePopup));
-closeNewPlaceBtn.addEventListener('click', () => togglePopup(newPlace));
-closePhotoBtn.addEventListener('click', () => togglePopup(photoPopup));
+addBtn.addEventListener('click', () => openPopup(newPlace));
+editBtn.addEventListener('click', () => openPopup(profilePopup));
+closeProfileBtn.addEventListener('click', () => closePopup(profilePopup));
+closeNewPlaceBtn.addEventListener('click', () => closePopup(newPlace));
+closePhotoBtn.addEventListener('click', () => closePopup(photoPopup));
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
