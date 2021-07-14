@@ -36,7 +36,7 @@ const hideError = (element, error, inputErrorClass) => {
 
 
 const checkValidity = (form, element, settings) => {
-  const error = document.querySelector(`#${element.id}-error`);
+  const error = form.querySelector(`#${element.id}-error`);
 
   if (!element.validity.valid){
     showError(element, error, settings.inputErrorClass, settings.errorClass);
