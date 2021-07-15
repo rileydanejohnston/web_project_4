@@ -58,12 +58,22 @@ const initialCards = [
 const openPopup = (modal) => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
+
   modal.classList.add('popup_active');
+  document.addEventListener('keydown', closeByEsc);
 };
 
 const closePopup = (modal) => {
   modal.classList.remove('popup_active');
+  document.removeEventListener('keydown', closeByEsc);
 };
+
+function closeByEsc(e){
+  if (e.key === 'Escape'){
+    const activePopup = document.querySelector('.popup_active');
+    closePopup(activePopup);
+  }
+}
 
 /***********************************************************/
 // update profile
@@ -131,25 +141,14 @@ const createButtonListeners = (card) => {
   });
 }
 
-const closePopupEsc = (e) => {
-  if (e.key === 'Escape' && profilePopup.classList.contains('popup_active')){
-    closePopup(profilePopup);
-  }
-  else if (e.key === 'Escape' && newPlacePopup.classList.contains('popup_active')){
-    closePopup(newPlacePopup);
-  }
-  else if (e.key === 'Escape' && photoPopup.classList.contains('popup_active')){
-    closePopup(photoPopup);
-  }
-};
 
 const btnOverlayListener = (popup) => {
   popup.addEventListener('click', e => {
     if (e.target.classList.contains('popup__close')){
-      closePopup(e.target);
+      closePopup(e.currentTarget);
     }
     if (e.target.classList.contains('popup_active')){
-      closePopup(e.target)
+      closePopup(e.target);
     }
   });
 };
@@ -162,12 +161,8 @@ const btnOverlayListener = (popup) => {
 addBtn.addEventListener('click', () => openPopup(newPlace));
 editBtn.addEventListener('click', () => openPopup(profilePopup));
 
-popups.forEach(popup, () => btnOverlayListener(popup));
-
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
 
-document.addEventListener('keydown', closePopupEsc);
-document.addEventListener('click', closePopupOverlay);
-
+popups.forEach((popup) => btnOverlayListener(popup));
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
