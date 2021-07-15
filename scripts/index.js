@@ -19,10 +19,9 @@ const popupCaption = document.querySelector('.popup__caption');
 
 const addBtn = document.querySelector('.profile__add-button');
 const editBtn = document.querySelector('.profile__edit-button');
-const closeProfileBtn = profilePopup.querySelector('.popup__close');
-const closeNewPlaceBtn = newPlacePopup.querySelector('.popup__close');
-const closePhotoBtn = photoPopup.querySelector('.popup__close');
 const newPlaceSubmit = newPlaceForm.querySelector('.popup__submit');
+
+const popups = document.querySelectorAll('.popup');
 
 
 const initialCards = [
@@ -144,12 +143,16 @@ const closePopupEsc = (e) => {
   }
 };
 
-const closePopupOverlay = (e) => {
-  if (e.target.classList.contains('popup_active')){
-    e.target.addEventListener('click', closePopup(e.target));
-  }
+const btnOverlayListener = (popup) => {
+  popup.addEventListener('click', e => {
+    if (e.target.classList.contains('popup__close')){
+      closePopup(e.target);
+    }
+    if (e.target.classList.contains('popup_active')){
+      closePopup(e.target)
+    }
+  });
 };
-
 
 /***********************************************************/
 // event handlers
@@ -158,9 +161,8 @@ const closePopupOverlay = (e) => {
 
 addBtn.addEventListener('click', () => openPopup(newPlace));
 editBtn.addEventListener('click', () => openPopup(profilePopup));
-closeProfileBtn.addEventListener('click', () => closePopup(profilePopup));
-closeNewPlaceBtn.addEventListener('click', () => closePopup(newPlace));
-closePhotoBtn.addEventListener('click', () => closePopup(photoPopup));
+
+popups.forEach(popup, () => btnOverlayListener(popup));
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
