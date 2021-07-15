@@ -22,6 +22,7 @@ const editBtn = document.querySelector('.profile__edit-button');
 const closeProfileBtn = profilePopup.querySelector('.popup__close');
 const closeNewPlaceBtn = newPlacePopup.querySelector('.popup__close');
 const closePhotoBtn = photoPopup.querySelector('.popup__close');
+const newPlaceSubmit = newPlaceForm.querySelector('.popup__submit');
 
 
 const initialCards = [
@@ -94,8 +95,10 @@ const getCardInfo = (event) => {
   newPlaceTitle.value = '';
   newPlaceLink.value = '';
 
+  newPlaceSubmit.setAttribute('disabled', true);
+  newPlaceSubmit.classList.add('popup__submit_disabled');
 
-  openPopup(newPlace);
+  closePopup(newPlace);
 }
 
 // add initial cards & add user cards to DOM
