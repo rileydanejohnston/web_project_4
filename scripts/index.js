@@ -164,5 +164,5 @@ editBtn.addEventListener('click', () => openPopup(profilePopup));
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
 
-popups.forEach((popup) => btnOverlayListener(popup));
+popups.forEach(btnOverlayListener);
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
