@@ -56,9 +56,6 @@ const initialCards = [
 /***********************************************************/
 
 const openPopup = (modal) => {
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-
   modal.classList.add('popup_active');
   document.addEventListener('keydown', closeByEsc);
 };
@@ -159,7 +156,11 @@ const btnOverlayListener = (popup) => {
 
 
 addBtn.addEventListener('click', () => openPopup(newPlace));
-editBtn.addEventListener('click', () => openPopup(profilePopup));
+editBtn.addEventListener('click', () => {
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
+  openPopup(profilePopup);
+});
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
