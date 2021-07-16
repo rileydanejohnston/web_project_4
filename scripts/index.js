@@ -86,7 +86,7 @@ function updateProfile(event) {
   profileName.textContent = inputName.value; 
   profileAbout.textContent = inputAbout.value;
 
-  openPopup(profilePopup);
+  closePopup(profilePopup);
 }
 
 /***********************************************************/
