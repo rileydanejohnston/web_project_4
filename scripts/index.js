@@ -46,7 +46,7 @@ const initialCards = [
     link: "./images/cities/austin.png"
   },
   {
-    name: "Abuquerque",
+    name: "Albuquerque",
     link: "./images/cities/albuquerque.png"
   },
 ];
