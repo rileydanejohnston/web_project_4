@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const profilePopup = document.querySelector('#editProfile');
 const newPlacePopup = document.querySelector('#newPlace');
@@ -21,6 +22,16 @@ const editBtn = document.querySelector('.profile__edit-button');
 const newPlaceSubmit = newPlaceForm.querySelector('.popup__submit');
 
 const popups = document.querySelectorAll('.popup');
+const forms = document.querySelectorAll('.popup__form');
+
+const settings = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+};
 
 
 const initialCards = [
@@ -140,6 +151,12 @@ editBtn.addEventListener('click', () => {
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
+
+forms.forEach(form => {
+  const formObject = new FormValidator(settings, form);
+
+  formObject.enableValidation();
+});
 
 popups.forEach(btnOverlayListener);
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
