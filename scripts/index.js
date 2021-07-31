@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const profilePopup = document.querySelector('#editProfile');
 const newPlacePopup = document.querySelector('#newPlace');
 const photoPopup = document.querySelector('#photo');
@@ -13,9 +15,6 @@ const newPlaceTitle = newPlaceForm.querySelector('.popup__name');
 const newPlaceLink = newPlaceForm.querySelector('.popup__about');
 
 const cardList = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#cardTemplate').content;
-const popupImage = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__caption');
 
 const addBtn = document.querySelector('.profile__add-button');
 const editBtn = document.querySelector('.profile__edit-button');
@@ -109,33 +108,10 @@ const getCardInfo = (event) => {
 
 // add initial cards & add user cards to DOM
 const addCard = (cardName, cardLink) => {
-  const newCard = cardTemplate.querySelector('.cards__item').cloneNode(true);
+  const cardInfo = {name: cardName, link: cardLink};
+  const card = new Card(cardInfo, '#cardTemplate');
 
-  newCard.querySelector('.cards__name').textContent = cardName;
-  newCard.querySelector('.cards__photo').alt = cardName;
-  newCard.querySelector('.cards__photo').src = cardLink;
-
-  cardList.prepend(newCard);
-
-  createButtonListeners(newCard);
-}
-
-// create event listener for like button, close button, picture
-const createButtonListeners = (card) => {
-  const likeBtn = card.querySelector('.cards__like-button');
-  const closeBtn = card.querySelector('.cards__close-button');
-  const pic = card.querySelector('.cards__photo');
-  
-  likeBtn.addEventListener('click', (event) => event.target.classList.toggle('cards__like-button_active'));
-
-  closeBtn.addEventListener('click', () => card.remove());
-
-  pic.addEventListener('click', (event) => {
-    popupImage.src = event.target.src;
-    popupImage.alt = event.target.alt;
-    popupCaption.textContent = event.target.alt
-    openPopup(photoPopup);
-  });
+  cardList.prepend(card.getCard());
 }
 
 
