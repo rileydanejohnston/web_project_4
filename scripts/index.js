@@ -160,3 +160,5 @@ forms.forEach(form => {
 
 popups.forEach(btnOverlayListener);
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
+
+export { openPopup, photoPopup };
