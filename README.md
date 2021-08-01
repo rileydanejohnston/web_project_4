@@ -4,10 +4,10 @@
 [Around The U.S.](https://rileydanejohnston.github.io/web_project_4/)
 
 ## Description
-_"Around The U.S." is a single page website that has an editible profile section and a cards section. The cards section starts with 6 intial cards. The user has the ability to add and delete cards as they see fit_
+_"Around The U.S." is a single page website that has an editible profile section and a cards section. The cards section starts with 6 intial cards. The user has the ability to add, delete and like cards as they see fit._
 
 ## Techniques
-_The first function of "Around The U.S" is the ability to update the profile section. This is done by clicking the edit button to the right of the words "Jacques Cousteau" then entering new values in the name & about fields._
+_The first function of "Around The U.S" is the ability to update the profile section. This is done by clicking the edit button to the right of the words "Jacques Cousteau" then entering new values in the name and about fields._
 
 _The user also can manipulate how many places appear on their page. Click the button with the "+" symbol to add a new card. A popup form will prompt the user for the name of a place and the address of a photo. The new card will appear at the beginning of the list when the user submits the form. In addition to adding cards, the user can also delete cards by clicking the trash can icon in the top right corner of each card._
 
@@ -22,7 +22,7 @@ _CSS is used to make the site responsive when it's viewed on different screen si
 
 _JavaScript is used to handle some basic input procedures and HTML manipulations. When the user clicks the edit button, a form will appear allowing the user to update their profile information. The form will disappear when the user clicks the save/close buttons._
 
-_The add place button is very similar to the edit button. A form will appear, the user enters the place name & image source, then the place cards are created dynamically by cloning a template when the user clicks the save button._
+_The add place button is very similar to the edit button. A form will appear, the user enters the place name and image source, then the place cards are created dynamically by creating a new instance of the Card class when the user clicks the save button. The place and name the user enters will be inserted onto the card before the card is added to the page._
 
 _The close button removes the card from the page. This is done by with the remove function and an event listener. When the close button for that specific card is clicked, the card is removed from the list of cards._
 
@@ -34,7 +34,7 @@ _The user can now close the popups by pressing the escape key. The document has 
 
 _The user can also close the popups by clicking the overlay outside the form or photo. The document has an event listener that fires when a left click happens. The popup will close if the element that was clicked is the overlay._
 
-_All forms on the page now have input validation. The first step is to grab all forms on the page and iterate through them. Next we grab all the inputs for each individual form. The next step is to add an input event listener to each input element. The input validity is tested based on the rules created in the HTML document. The input border will turn red, an error message will display, and the submit button will be disabled when the input is invalid. The input border will turn black, the error message will disappear, and the submit button will be enabled when the input is valid. The best part is that the input validation will also work for future forms that are added to the page._
+_All forms on the page now have input validation using the FormValidator class. The first step is to create an instance of the FormValidator class for each form on the page. Next we grab all the inputs for each individual form. The next step is to add an input event listener to each input element. The input validity is tested based on the attributes added to the input elements in the HTML document. The input border will turn red, an error message will display, and the submit button will be disabled when the input is invalid. The input border will turn black, the error message will disappear, and the submit button will be enabled when the input is valid. The best part is that the input validation will also work for future forms that are added to the page._
 
 ## Future Features
-1. Create an account so users can save their profiles & cards
+1. Create an account so users can save their profiles and cards
