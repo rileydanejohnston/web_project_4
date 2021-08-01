@@ -4,7 +4,7 @@
 [Around The U.S.](https://rileydanejohnston.github.io/web_project_4/)
 
 ## Description
-_"Around The U.S." is a single page website that has an editible profile section and a cards section. The cards section starts with 6 intial cards. The user has the ability to add and delete cards as they see fit_
+_"Around The U.S." is a single page website that has an editible profile section and a cards section. The cards section starts with 6 intial cards. The user has the ability to add, delete and like cards as they see fit._
 
 ## Techniques
 _The first function of "Around The U.S" is the ability to update the profile section. This is done by clicking the edit button to the right of the words "Jacques Cousteau" then entering new values in the name and about fields._
