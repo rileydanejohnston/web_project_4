@@ -1,4 +1,4 @@
-import { openPopup, photoPopup } from './index.js';
+import { openPopup, photoPopup, imgPopup, imgCaption } from './index.js';
 
 export default class Card {
   constructor(data, selector) {
@@ -20,9 +20,6 @@ export default class Card {
 
 
   _enlargePhoto(e) {
-    const imgPopup = document.querySelector('.popup__image');
-    const imgCaption = document.querySelector('.popup__caption');
-
     imgPopup.src = e.target.src;
     imgPopup.alt = e.target.alt;
     imgCaption.textContent = e.target.alt;

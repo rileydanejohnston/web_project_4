@@ -5,6 +5,9 @@ const profilePopup = document.querySelector('#editProfile');
 const newPlacePopup = document.querySelector('#newPlace');
 const photoPopup = document.querySelector('#photo');
 
+const imgPopup = photoPopup.querySelector('.popup__image');
+const imgCaption = photoPopup.querySelector('.popup__caption');
+
 const profileForm = profilePopup.querySelector('.popup__form');
 const newPlaceForm = newPlacePopup.querySelector('.popup__form');
 
@@ -161,4 +164,4 @@ forms.forEach(form => {
 popups.forEach(btnOverlayListener);
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
 
-export { openPopup, photoPopup };
+export { openPopup, photoPopup, imgPopup, imgCaption };
