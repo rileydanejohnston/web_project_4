@@ -10,7 +10,7 @@ export default class FormValidator {
     this._form = form;
   }
 
-  _resetValidation(button) {
+  _disableButton(button) {
     button.classList.add(this._inactiveButtonClass);
     button.setAttribute('disabled', true);
   }
