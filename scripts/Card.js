@@ -1,15 +1,11 @@
+import { openPopup, photoPopup, imgPopup, imgCaption } from './index.js';
+
 export default class Card {
   constructor(data, selector) {
     this._text = data.name;
     this._link = data.link;
     this._selector = selector;
     this._element = null;
-  }
-
-
-  _openPopup() {
-    const photoPopup = document.querySelector('#photo');
-    photoPopup.classList.add('popup_active');
   }
 
 
@@ -23,16 +19,12 @@ export default class Card {
   }
 
 
-  _popupPhoto(e) {
-    const imgPopup = document.querySelector('.popup__image');
-    const imgCaption = document.querySelector('.popup__caption');
-
+  _enlargePhoto(e) {
     imgPopup.src = e.target.src;
     imgPopup.alt = e.target.alt;
     imgCaption.textContent = e.target.alt;
 
-    console.log(e.target);
-    this._openPopup();
+    openPopup(photoPopup);
   }
 
 
@@ -44,7 +36,7 @@ export default class Card {
 
     close.addEventListener('click', () => this._deleteCard());
     like.addEventListener('click', (e) => this._likeCard(e));
-    photo.addEventListener('click', (e) => this._popupPhoto(e));
+    photo.addEventListener('click', (e) => this._enlargePhoto(e));
   }
 
 
