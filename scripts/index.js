@@ -1,6 +1,15 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
+const settings = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+};
+
 const profilePopup = document.querySelector('#editProfile');
 const newPlacePopup = document.querySelector('#newPlace');
 const photoPopup = document.querySelector('#photo');
@@ -10,6 +19,9 @@ const imgCaption = photoPopup.querySelector('.popup__caption');
 
 const profileForm = profilePopup.querySelector('.popup__form');
 const newPlaceForm = newPlacePopup.querySelector('.popup__form');
+
+const profileValidator = new FormValidator(settings, profileForm);
+const newPlaceValidator = new FormValidator(settings, newPlaceForm);
 
 const inputName = profileForm.querySelector('.popup__name');
 const inputAbout = profileForm.querySelector('.popup__about');
@@ -25,16 +37,6 @@ const editBtn = document.querySelector('.profile__edit-button');
 const newPlaceSubmit = newPlaceForm.querySelector('.popup__submit');
 
 const popups = document.querySelectorAll('.popup');
-const forms = document.querySelectorAll('.popup__form');
-
-const settings = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit",
-  inactiveButtonClass: "popup__submit_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible"
-};
 
 
 const initialCards = [
@@ -114,9 +116,6 @@ const getCardInfo = (event) => {
   newPlaceTitle.value = '';
   newPlaceLink.value = '';
 
-  newPlaceSubmit.setAttribute('disabled', true);
-  newPlaceSubmit.classList.add('popup__submit_disabled');
-
   closePopup(newPlace);
 }
 
@@ -155,11 +154,8 @@ editBtn.addEventListener('click', () => {
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
 
-forms.forEach(form => {
-  const formObject = new FormValidator(settings, form);
-
-  formObject.enableValidation();
-});
+profileValidator.enableValidation();
+newPlaceValidator.enableValidation();
 
 popups.forEach(btnOverlayListener);
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
