@@ -28,27 +28,29 @@ export default class FormValidator {
     }
   }
 
-  _showError(input, errorElement, errorMessage) {
+  _showError(input) {
+    const errorElement = this._form.querySelector(`#${input.id}-error`);
+    const errorMessage = input.validationMessage;
+
     input.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
   }
 
-  _hideError(input, error) {
+  _hideError(input) {
+    const errorElement = this._form.querySelector(`#${input.id}-error`);
+
     input.classList.remove(this._inputErrorClass);
-    error.textContent = '';
-    error.classList.remove(this._errorClass);
+    errorElement.textContent = '';
+    errorElement.classList.remove(this._errorClass);
   }
 
   _checkValidity(input) {
-    const errorElement = this._form.querySelector(`#${input.id}-error`);
-    const errorMessage = input.validationMessage;
-
     if (input.validity.valid){
-      this._hideError(input, errorElement);
+      this._hideError(input);
     }
     else {
-      this._showError(input, errorElement, errorMessage);
+      this._showError(input);
     }
   }
 
