@@ -116,6 +116,8 @@ const getCardInfo = (event) => {
   newPlaceTitle.value = '';
   newPlaceLink.value = '';
 
+  newPlaceValidator.resetValidation();
+
   closePopup(newPlace);
 }
 
