@@ -1,5 +1,6 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import Popup from '../components/Popup.js';
 import Section from '../components/Section.js';
 
 const settings = {
@@ -148,10 +149,15 @@ const btnOverlayListener = (popup) => {
 
 
 addBtn.addEventListener('click', () => openPopup(newPlace));
-editBtn.addEventListener('click', () => {
+/*editBtn.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
   openPopup(profilePopup);
+}); */
+const myPopup = new Popup('#editProfile');
+editBtn.addEventListener('click', () => {
+  myPopup.open();
+  myPopup.setEventListeners();
 });
 
 profileForm.addEventListener('submit', updateProfile);
@@ -160,7 +166,7 @@ newPlaceForm.addEventListener('submit', getCardInfo);
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
 
-popups.forEach(btnOverlayListener);
+//popups.forEach(btnOverlayListener);
 initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
 
 export { openPopup, photoPopup, imgPopup, imgCaption };
