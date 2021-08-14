@@ -154,11 +154,6 @@ addBtn.addEventListener('click', () => openPopup(newPlace));
   inputAbout.value = profileAbout.textContent;
   openPopup(profilePopup);
 }); */
-const myPopup = new Popup('#editProfile');
-editBtn.addEventListener('click', () => {
-  myPopup.open();
-  myPopup.setEventListeners();
-});
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
