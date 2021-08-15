@@ -1,7 +1,7 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import Popup from '../components/Popup.js';
 import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const settings = {
   formSelector: ".popup__form",
@@ -149,11 +149,11 @@ const btnOverlayListener = (popup) => {
 
 
 addBtn.addEventListener('click', () => openPopup(newPlace));
-/*editBtn.addEventListener('click', () => {
+editBtn.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
   openPopup(profilePopup);
-}); */
+});
 
 profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
