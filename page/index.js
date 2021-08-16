@@ -34,13 +34,15 @@ const profileAbout = document.querySelector('.profile__about');
 const newPlaceTitle = newPlaceForm.querySelector('.popup__name');
 const newPlaceLink = newPlaceForm.querySelector('.popup__about');
 
-const cardList = document.querySelector('.cards');
-
 const addBtn = document.querySelector('.profile__add-button');
 const editBtn = document.querySelector('.profile__edit-button');
 const newPlaceSubmit = newPlaceForm.querySelector('.popup__submit');
 
 const popups = document.querySelectorAll('.popup');
+
+/***********************************************************/
+
+const cardContainer = document.querySelector('.cards');
 
 
 const initialCards = [
@@ -125,14 +127,6 @@ const getCardInfo = (event) => {
   closePopup(newPlace);
 }
 
-// add initial cards & add user cards to DOM
-const addCard = (cardName, cardLink) => {
-  const cardInfo = {name: cardName, link: cardLink};
-  const card = new Card(cardInfo, '#cardTemplate');
-
-  cardList.prepend(card.getCard());
-}
-
 
 const btnOverlayListener = (popup) => {
   popup.addEventListener('click', e => {
@@ -150,6 +144,28 @@ const btnOverlayListener = (popup) => {
 /***********************************************************/
 
 
+const handleCardClick = (e) => {
+  const imagePopup = new PopupWithImage({ name: e.target.alt, link: e.target.src });
+
+  imagePopup.open();
+}
+
+
+
+const defaultCards = new Section(
+  { 
+    items: initialCards, 
+    renderer: (item) => {
+      const newCard = new Card(item, '#cardTemplate', handleCardClick);
+      defaultCards.addItem(newCard.getCard());
+    }
+  }, '.cards');
+defaultCards.renderElements();
+
+
+
+/***********************************************************/
+
 addBtn.addEventListener('click', () => openPopup(newPlace));
 /*editBtn.addEventListener('click', () => {
   inputName.value = profileName.textContent;
@@ -162,8 +178,5 @@ newPlaceForm.addEventListener('submit', getCardInfo);
 
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
-
-//popups.forEach(btnOverlayListener);
-initialCards.forEach((cardInfo) => addCard(cardInfo.name, cardInfo.link));
 
 export { openPopup, photoPopup, imgPopup, imgCaption };

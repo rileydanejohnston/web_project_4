@@ -1,11 +1,12 @@
 import { openPopup, photoPopup, imgPopup, imgCaption } from '../page/index.js';
 
 export default class Card {
-  constructor(data, selector) {
-    this._text = data.name;
-    this._link = data.link;
+  constructor({ name, link }, selector, handleCardClick) {
+    this._text = name;
+    this._link = link;
     this._selector = selector;
     this._element = null;
+    this._handleCardClick = handleCardClick;
   }
 
 
@@ -20,11 +21,14 @@ export default class Card {
 
 
   _enlargePhoto(e) {
+    /*
     imgPopup.src = e.target.src;
     imgPopup.alt = e.target.alt;
     imgCaption.textContent = e.target.alt;
+    openPopup(photoPopup); */
 
-    openPopup(photoPopup);
+    
+    this._handleCardClick(e);
   }
 
 
