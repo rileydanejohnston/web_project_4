@@ -145,7 +145,13 @@ const btnOverlayListener = (popup) => {
 
 
 const handleCardClick = (e) => {
-  const imagePopup = new PopupWithImage({ name: e.target.alt, link: e.target.src });
+
+  const clickedPhoto = { 
+    name: e.target.alt, 
+    link: e.target.src 
+  }
+  
+  const imagePopup = new PopupWithImage(clickedPhoto);
 
   imagePopup.open();
 }
