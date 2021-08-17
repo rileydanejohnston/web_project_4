@@ -1,5 +1,3 @@
-import { openPopup, photoPopup, imgPopup, imgCaption } from '../page/index.js';
-
 export default class Card {
   constructor({ name, link }, selector, handleCardClick) {
     this._text = name;
