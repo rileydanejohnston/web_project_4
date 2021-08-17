@@ -127,33 +127,8 @@ const btnOverlayListener = (popup) => {
 };
 
 /***********************************************************/
-// event handlers
+// handleCardClick is the logic that handles when a card photo is clicked. The photo/caption is put into a popup
 /***********************************************************/
-
-const profileSelectors = {
-  nameSelector: '.profile__name',
-  aboutSelector: '.profile__about'
-};
-
-const profileFormInfo = {
-    formSelector: '#profile-popup',
-    formSubmission: ({ input1: name, input2: about }) => {
-      userProfile.setUserInfo({ name: name, about: about });
-      profilePopup.close();
-    }
-}
-
-
-const userProfile = new UserInfo(profileSelectors);
-const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
-
-
-editBtn.addEventListener('click', () => {
-  profilePopup.setEventListeners();
-  profilePopup.open();
-});
-
-
 
 const handleCardClick = (e) => {
   const clickedPhoto = { 
@@ -165,26 +140,78 @@ const handleCardClick = (e) => {
   imagePopup.open();
 }
 
-
-
-const defaultCards = new Section(
+/***********************************************************/
+/* cards is the object for the place cards section (duh). 
+      - renders default cards to page
+      - adds new user-made cards to page                  */
+/***********************************************************/
+const cards = new Section(
   { 
     items: initialCards, 
     renderer: (item) => {
       const newCard = new Card(item, '#cardTemplate', handleCardClick);
-      defaultCards.addItem(newCard.getCard());
+      cards.addItem(newCard.getCard());
     }
   }, '.cards');
-defaultCards.renderElements();
 
+
+
+cards.renderElements();
+
+/***********************************************************/
+/* profileSelectors, profileFormInfo, and placeFormInfo hold data needed to make various class instances. 
+      - created separate from class instances for readability                                 */
+/***********************************************************/
+const profileSelectors = {
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__about'
+};
+
+const profileFormInfo = {
+  formSelector: '#profile-popup',
+  formSubmission: ({ input1: name, input2: about }) => {
+    userProfile.setUserInfo({ name: name, about: about });
+    profilePopup.close();
+  }
+};
+
+const placeFormInfo = {
+  formSelector: '#place-popup',
+  formSubmission: ({ input1: name, input2: link }) => {
+    const addCard = new Card({ name, link }, '#cardTemplate', handleCardClick);
+    cards.addItem(addCard.getCard());
+    placePopup.close();
+  }
+};
+
+/***********************************************************/
+// class instances
+/***********************************************************/
+const userProfile = new UserInfo(profileSelectors);
+const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
+const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
+
+/***********************************************************/
+// event listeners
+/***********************************************************/
+editBtn.addEventListener('click', () => {
+  profilePopup.setEventListeners();
+  profilePopup.open();
+});
+
+
+addBtn.addEventListener('click', () => {
+  placePopup.setEventListeners();
+  placePopup.open();
+});
 
 
 /***********************************************************/
 
-addBtn.addEventListener('click', () => openPopup(newPlace));
+//addBtn.addEventListener('click', () => openPopup(newPlace));
 
 //profileForm.addEventListener('submit', updateProfile);
-newPlaceForm.addEventListener('submit', getCardInfo);
+//newPlaceForm.addEventListener('submit', getCardInfo);
 
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
