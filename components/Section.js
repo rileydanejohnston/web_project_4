@@ -10,7 +10,6 @@ export default class Section {
     });
   }
   addItem(element) {
-    console.log(this._container);
     this._container.prepend(element);
   }
 }

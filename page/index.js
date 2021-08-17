@@ -14,21 +14,21 @@ const settings = {
   errorClass: "popup__error_visible"
 };
 
-const profilePopup = document.querySelector('#editProfile');
+
 const newPlacePopup = document.querySelector('#newPlace');
 const photoPopup = document.querySelector('#photo');
 
 const imgPopup = photoPopup.querySelector('.popup__image');
 const imgCaption = photoPopup.querySelector('.popup__caption');
 
-const profileForm = profilePopup.querySelector('.popup__form');
+const userInfoForm = document.querySelector('#profile-popup');
 const newPlaceForm = newPlacePopup.querySelector('.popup__form');
 
-const profileValidator = new FormValidator(settings, profileForm);
+const profileValidator = new FormValidator(settings, userInfoForm);
 const newPlaceValidator = new FormValidator(settings, newPlaceForm);
 
-const inputName = profileForm.querySelector('.popup__name');
-const inputAbout = profileForm.querySelector('.popup__about');
+//const inputName = profileForm.querySelector('.popup__name');
+//const inputAbout = profileForm.querySelector('.popup__about');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 const newPlaceTitle = newPlaceForm.querySelector('.popup__name');
@@ -93,19 +93,6 @@ function closeByEsc(e){
   }
 }
 
-/***********************************************************/
-// update profile
-/***********************************************************/
-
-
-function updateProfile(event) {
-  event.preventDefault();
-
-  profileName.textContent = inputName.value; 
-  profileAbout.textContent = inputAbout.value;
-
-  closePopup(profilePopup);
-}
 
 /***********************************************************/
 // card functions
@@ -143,16 +130,38 @@ const btnOverlayListener = (popup) => {
 // event handlers
 /***********************************************************/
 
+const profileSelectors = {
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__about'
+};
+
+const profileFormInfo = {
+    formSelector: '#profile-popup',
+    formSubmission: ({ input1: name, input2: about }) => {
+      userProfile.setUserInfo({ name: name, about: about });
+      profilePopup.close();
+    }
+}
+
+
+const userProfile = new UserInfo(profileSelectors);
+const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
+
+
+editBtn.addEventListener('click', () => {
+  profilePopup.setEventListeners();
+  profilePopup.open();
+});
+
+
 
 const handleCardClick = (e) => {
-
   const clickedPhoto = { 
     name: e.target.alt, 
     link: e.target.src 
   }
   
   const imagePopup = new PopupWithImage(clickedPhoto);
-
   imagePopup.open();
 }
 
@@ -173,11 +182,6 @@ defaultCards.renderElements();
 /***********************************************************/
 
 addBtn.addEventListener('click', () => openPopup(newPlace));
-/*editBtn.addEventListener('click', () => {
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-  openPopup(profilePopup);
-}); */
 
 //profileForm.addEventListener('submit', updateProfile);
 newPlaceForm.addEventListener('submit', getCardInfo);
