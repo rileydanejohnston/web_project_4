@@ -1,9 +1,17 @@
-import Card from '../components/Card.js';
-import FormValidator from '../components/FormValidator.js';
-import Section from '../components/Section.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js';
+import Card from './components/Card.js';
+import FormValidator from './components/FormValidator.js';
+import Section from './components/Section.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
+import './styles/index.css';
+
+import stPaul from './images/cities/stPaul.png';
+import la from './images/cities/losAngeles.png';
+import kansas from './images/cities/kansasCity.png';
+import charleston from './images/cities/charleston.png';
+import austin from './images/cities/austin.png';
+import albuquerque from './images/cities/albuquerque.png';
 
 
 const userInfoForm = document.querySelector('#profile-popup');
@@ -25,27 +33,27 @@ const settings = {
 const initialCards = [
   {
     name: "St. Paul",
-    link: "./images/cities/stPaul.png"
+    link: stPaul
   },
   {
     name: "Los Angeles",
-    link: "./images/cities/losAngeles.png"
+    link: la
   },
   {
     name: "Kansas City",
-    link: "./images/cities/kansasCity.png"
+    link: kansas
   },
   {
     name: "Charleston",
-    link: "./images/cities/charleston.png"
+    link: charleston
   },
   {
     name: "Austin",
-    link: "./images/cities/austin.png"
+    link: austin
   },
   {
     name: "Albuquerque",
-    link: "./images/cities/albuquerque.png"
+    link: albuquerque
   },
 ];
 
