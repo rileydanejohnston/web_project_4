@@ -19,21 +19,14 @@ export default class Card {
 
 
   _enlargePhoto(e) {
-    /*
-    imgPopup.src = e.target.src;
-    imgPopup.alt = e.target.alt;
-    imgCaption.textContent = e.target.alt;
-    openPopup(photoPopup); */
-
-    
     this._handleCardClick(e);
   }
 
 
-  _setEventListeners(card) {
-    const photo = card.querySelector('.cards__photo');
-    const close = card.querySelector('.cards__close-button'); 
-    const like = card.querySelector('.cards__like-button');
+  _setEventListeners() {
+    const photo = this._element.querySelector('.cards__photo');
+    const close = this._element.querySelector('.cards__close-button'); 
+    const like = this._element.querySelector('.cards__like-button');
     
 
     close.addEventListener('click', () => this._deleteCard());
@@ -45,14 +38,14 @@ export default class Card {
   _getTemplate() {
     const cardTemplate = document.querySelector(`${this._selector}`).content.querySelector('.cards__item').cloneNode(true);
 
-    this._setEventListeners(cardTemplate);
-
     return cardTemplate;
   }
 
   
   getCard() {
     this._element = this._getTemplate();
+    this._setEventListeners();
+    
     const cardImage = this._element.querySelector('.cards__photo');
     const cardName = this._element.querySelector('.cards__name');
 
