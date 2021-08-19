@@ -57,22 +57,6 @@ const initialCards = [
   },
 ];
 
-
-/***********************************************************/
-// handleCardClick is the logic that handles when a card photo is clicked. The photo/caption is put into a popup
-/***********************************************************/
-
-const handleCardClick = (e) => {
-  const clickedPhoto = { 
-    name: e.target.alt, 
-    link: e.target.src 
-  }
-  
-  const imagePopup = new PopupWithImage(clickedPhoto);
-  imagePopup.open();
-}
-
-
 /***********************************************************/
 /* profileSelectors, profileFormInfo, placeFormInfo, & sectionInfo hold data needed to make various class instances. 
       - created separate from class instances for readability                                 */
@@ -85,30 +69,40 @@ const profileSelectors = {
 
 const profileFormInfo = {
   formSelector: '#profile-popup',
-  formSubmission: ({ input1: name, input2: about }) => {
+  formSubmission: ({ name, about }) => {
     userProfile.setUserInfo({ name: name, about: about });
     profilePopup.close();
-    profileValidator.resetValidation();
+    
   }
 };
 
+const createCard = (cardInfo, cardSelector, cardClick) => {
+  return new Card(cardInfo, cardSelector, cardClick);
+}
+
 const placeFormInfo = {
   formSelector: '#place-popup',
-  formSubmission: ({ input1: name, input2: link }) => {
-    const addCard = new Card({ name, link }, '#cardTemplate', handleCardClick);
+  formSubmission: ({ title: name, link: link }) => {
+    const addCard = createCard({ name, link }, '#cardTemplate', handleCardClick);
     cards.addItem(addCard.getCard());
     placePopup.close();
-    newPlaceValidator.resetValidation();
+    
   }
 };
 
 const sectionInfo = {
   items: initialCards, 
   renderer: (item) => {
-    const newCard = new Card(item, '#cardTemplate', handleCardClick);
+    const newCard = createCard(item, '#cardTemplate', handleCardClick);
     cards.addItem(newCard.getCard());
   }
 };
+
+
+const handleCardClick = (e) => {
+  const clickedPhoto = { name: e.target.alt, link: e.target.src }
+  imagePopup.open(clickedPhoto);
+}
 
 /***********************************************************/
 // class instances
@@ -119,21 +113,26 @@ const newPlaceValidator = new FormValidator(settings, newPlaceForm);
 const userProfile = new UserInfo(profileSelectors);
 const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
 const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
+const imagePopup = new PopupWithImage('#photo');
 const cards = new Section(sectionInfo, '.cards');
 
+
+profilePopup.setEventListeners();
+placePopup.setEventListeners();
+imagePopup.setEventListeners();
 
 /***********************************************************/
 // event listeners
 /***********************************************************/
 
 editBtn.addEventListener('click', () => {
-  profilePopup.setEventListeners();
+  profileValidator.resetValidation();
   profilePopup.open();
 });
 
 
 addBtn.addEventListener('click', () => {
-  placePopup.setEventListeners();
+  newPlaceValidator.resetValidation();
   placePopup.open();
 });
 
