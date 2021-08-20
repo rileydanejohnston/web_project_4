@@ -127,6 +127,9 @@ imagePopup.setEventListeners();
 
 editBtn.addEventListener('click', () => {
   profileValidator.resetValidation();
+
+  profilePopup.setInputs(userProfile.getUserInfo());
+
   profilePopup.open();
 });
 
