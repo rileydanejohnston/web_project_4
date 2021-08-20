@@ -1,9 +1,5 @@
+import { profilePopup, placePopup, cards, userProfile, createCard, handleCardClick } from '../page/index.js';
 import Card from '../components/Card.js';
-import FormValidator from '../components/FormValidator.js';
-import Section from '../components/Section.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js';
 
 import stPaul from '../images/cities/stPaul.png';
 import la from '../images/cities/losAngeles.png';
@@ -26,7 +22,7 @@ export const settings = {
   errorClass: "popup__error_visible"
 };
 
-export const initialCards = [
+const initialCards = [
   {
     name: "St. Paul",
     link: stPaul
@@ -67,10 +63,6 @@ export const profileFormInfo = {
   }
 };
 
-export const createCard = (cardInfo, cardSelector, cardClick) => {
-  return new Card(cardInfo, cardSelector, cardClick);
-}
-
 export const placeFormInfo = {
   formSelector: '#place-popup',
   formSubmission: ({ title: name, link: link }) => {
@@ -88,16 +80,3 @@ export const sectionInfo = {
     cards.addItem(newCard.getCard());
   }
 };
-
-export const handleCardClick = (e) => {
-  const clickedPhoto = { name: e.target.alt, link: e.target.src }
-  imagePopup.open(clickedPhoto);
-}
-
-export const profileValidator = new FormValidator(settings, userInfoForm);
-export const newPlaceValidator = new FormValidator(settings, newPlaceForm);
-export const userProfile = new UserInfo(profileSelectors);
-export const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
-export const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
-export const imagePopup = new PopupWithImage('#photo');
-export const cards = new Section(sectionInfo, '.cards');
