@@ -1,6 +1,3 @@
-import { profilePopup, placePopup, cards, userProfile, createCard, handleCardClick } from '../page/index.js';
-import Card from '../components/Card.js';
-
 import stPaul from '../images/cities/stPaul.png';
 import la from '../images/cities/losAngeles.png';
 import kansas from '../images/cities/kansasCity.png';
@@ -22,7 +19,7 @@ export const settings = {
   errorClass: "popup__error_visible"
 };
 
-const initialCards = [
+export const initialCards = [
   {
     name: "St. Paul",
     link: stPaul
@@ -52,31 +49,4 @@ const initialCards = [
 export const profileSelectors = {
   nameSelector: '.profile__name',
   aboutSelector: '.profile__about'
-};
-
-export const profileFormInfo = {
-  formSelector: '#profile-popup',
-  formSubmission: ({ name, about }) => {
-    userProfile.setUserInfo({ name: name, about: about });
-    profilePopup.close();
-    
-  }
-};
-
-export const placeFormInfo = {
-  formSelector: '#place-popup',
-  formSubmission: ({ title: name, link: link }) => {
-    const addCard = createCard({ name, link }, '#cardTemplate', handleCardClick);
-    cards.addItem(addCard.getCard());
-    placePopup.close();
-    
-  }
-};
-
-export const sectionInfo = {
-  items: initialCards, 
-  renderer: (item) => {
-    const newCard = createCard(item, '#cardTemplate', handleCardClick);
-    cards.addItem(newCard.getCard());
-  }
 };

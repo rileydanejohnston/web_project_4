@@ -6,29 +6,58 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css';
 
-import { editBtn, addBtn, settings, userInfoForm, newPlaceForm, profileSelectors, profileFormInfo, placeFormInfo, sectionInfo } from '../utils/constants.js';
+import { editBtn, addBtn, settings, userInfoForm, newPlaceForm, profileSelectors, initialCards } from '../utils/constants.js';
 
 
 
-export const createCard = (cardInfo, cardSelector, cardClick) => {
+const createCard = (cardInfo, cardSelector, cardClick) => {
   return new Card(cardInfo, cardSelector, cardClick);
 }
 
-export const handleCardClick = (e) => {
+const handleCardClick = (e) => {
   const clickedPhoto = { name: e.target.alt, link: e.target.src }
   imagePopup.open(clickedPhoto);
 }
 
 
 
+const profileFormInfo = {
+  formSelector: '#profile-popup',
+  formSubmission: ({ name, about }) => {
+    userProfile.setUserInfo({ name: name, about: about });
+    profilePopup.close();
+    
+  }
+};
+
+const placeFormInfo = {
+  formSelector: '#place-popup',
+  formSubmission: ({ title: name, link: link }) => {
+    const addCard = createCard({ name, link }, '#cardTemplate', handleCardClick);
+    cards.addItem(addCard.getCard());
+    placePopup.close();
+    
+  }
+};
+
+const sectionInfo = {
+  items: initialCards, 
+  renderer: (item) => {
+    const newCard = createCard(item, '#cardTemplate', handleCardClick);
+    cards.addItem(newCard.getCard());
+  }
+};
+
+
+
 const profileValidator = new FormValidator(settings, userInfoForm);
 const newPlaceValidator = new FormValidator(settings, newPlaceForm);
-export const userProfile = new UserInfo(profileSelectors);
-export const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
+const userProfile = new UserInfo(profileSelectors);
+const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
 
 const imagePopup = new PopupWithImage('#photo');
-export const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
-export const cards = new Section(sectionInfo, '.cards');
+const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
+const cards = new Section(sectionInfo, '.cards');
 
 
 
