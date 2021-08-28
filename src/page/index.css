@@ -24,6 +24,8 @@
 @import url('../blocks/cards/__photo/cards__photo.css');
 @import url('../blocks/cards/__label/cards__label.css');
 @import url('../blocks/cards/__name/cards__name.css');
+@import url('../blocks/cards/__like/cards__like.css');
+@import url('../blocks/cards/__like-count/cards__like-count.css');
 @import url('../blocks/cards/__like-button/cards__like-button.css');
 @import url('../blocks/cards/__like-button/_active/cards__like-button_active.css');
 
