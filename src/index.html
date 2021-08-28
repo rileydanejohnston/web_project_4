@@ -1,80 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>Around The U.S.</title>
 </head>
-<body class="root">
-  <div class="page">
-    <header class="header">
-      <div class="logo"></div>
+<body class='root'>
+  <div class='page'>
+    <header class='header'>
+      <div class='logo'></div>
     </header>
-    <main class="main">
-      <section class="profile">
-        <div class="profile__avatar"></div>
-        <div class="profile__info-container">
-          <div class="profile__info">
-            <div class="profile__name-button">
-              <h1 class="profile__name">Jacques Cousteau</h1>
-              <button class="profile__edit-button" type="button"></button>
+    <main class='main'>
+      <section class='profile'>
+        <div class='profile__avatar'></div>
+        <div class='profile__info-container'>
+          <div class='profile__info'>
+            <div class='profile__name-button'>
+              <h1 class='profile__name'>Jacques Cousteau</h1>
+              <button class='profile__edit-button' type='button'></button>
             </div>
-            <p class="profile__about">Explorer</p>
+            <p class='profile__about'>Explorer</p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button class='profile__add-button' type='button'></button>
         </div>
       </section>
-      <section class="locations">
-        <ul class="cards">
+      <section class='locations'>
+        <ul class='cards'>
         </ul>
       </section>
     </main>
-    <footer class="footer">
-      <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
+    <footer class='footer'>
+      <p class='footer__copyright'>&copy; 2021 Around The U.S.</p>
     </footer>
-    <div class="popup" id="editProfile">
-      <div class="popup__container">
-        <button class="popup__close" type="button"></button>
-        <form class="popup__form" id="profile-popup" method="POST" name="form" novalidate>
-          <h3 class="popup__title">Edit profile</h3>
-          <input class="popup__name popup__input" id="profile-name" type="text" placeholder="Name" name="name" minlength="2" maxlength="40" required>
-          <span class="popup__error" id="profile-name-error"></span>
-          <input class="popup__about popup__input" id="profile-about" type="text" placeholder="About" name="about" minlength="2" maxlength="200" required>
-          <span class="popup__error" id="profile-about-error"></span>
-          <button class="popup__submit popup__submit_disabled" id="profile-submit" type="submit" name="submit" disabled>Save</button>
+    <div class='popup' id='confirmPopup'>
+      <div class='popup__container'>
+        <button class='popup__close' type='button'></button>
+        <form class='popup__form' id='confirm-form' method='POST' name='form'>
+          <h3 class='popup__title popup__title_confirm'>Are you sure?</h3>
+          <button class='popup__submit popup__submit_confirm' id='confirm-submit' type='submit' name='submit'>Yes</button>
         </form>
       </div>
     </div>
-    <div class="popup" id="newPlace">
-      <div class="popup__container">
-        <button class="popup__close popup__close_type_place" type="button"></button>
-        <form class="popup__form" id="place-popup" method="POST" name="form" novalidate>
-          <h3 class="popup__title">New place</h3>
-          <input class="popup__name popup__input" id="newPlace-name" type="text" placeholder="Title" name="title" minlength="1" maxlength="30" required>
-          <span class="popup__error" id="newPlace-name-error"></span>
-          <input class="popup__about popup__input" id="newPlace-about" type="url" placeholder="Image link" name="link" required>
-          <span class="popup__error" id="newPlace-about-error"></span>
-          <button class="popup__submit popup__submit_disabled" type="submit" name="submit" disabled>Create</button>
+    <div class='popup' id='editProfile'>
+      <div class='popup__container'>
+        <button class='popup__close' type='button'></button>
+        <form class='popup__form' id='profile-popup' method='POST' name='form' novalidate>
+          <h3 class='popup__title'>Edit profile</h3>
+          <input class='popup__name popup__input' id='profile-name' type='text' placeholder='Name' name='name' minlength='2' maxlength='40' required>
+          <span class='popup__error' id='profile-name-error'></span>
+          <input class='popup__about popup__input' id='profile-about' type='text' placeholder='About' name='about' minlength='2' maxlength='200' required>
+          <span class='popup__error' id='profile-about-error'></span>
+          <button class='popup__submit popup__submit_disabled' id='profile-submit' type='submit' name='submit' disabled>Save</button>
         </form>
       </div>
     </div>
-    <div class="popup" id="photo">
-      <div class="popup__image-wrap">
-        <button class="popup__close popup__close_type_image" type="button"></button>
-        <img class="popup__image" src="City" alt="City">
-        <p class="popup__caption"></p>
+    <div class='popup' id='newPlace'>
+      <div class='popup__container'>
+        <button class='popup__close popup__close_type_place' type='button'></button>
+        <form class='popup__form' id='place-popup' method='POST' name='form' novalidate>
+          <h3 class='popup__title'>New place</h3>
+          <input class='popup__name popup__input' id='newPlace-name' type='text' placeholder='Title' name='title' minlength='1' maxlength='30' required>
+          <span class='popup__error' id='newPlace-name-error'></span>
+          <input class='popup__about popup__input' id='newPlace-about' type='url' placeholder='Image link' name='link' required>
+          <span class='popup__error' id='newPlace-about-error'></span>
+          <button class='popup__submit popup__submit_disabled' type='submit' name='submit' disabled>Create</button>
+        </form>
       </div>
     </div>
-    <template id="cardTemplate">
-      <li class="cards__item">
-        <img class="cards__photo" src="City" alt="City">
-        <button class="cards__close-button" type="button"></button>
-        <div class="cards__label">
-          <h2 class="cards__name"></h2>
-          <div class="cards__like">
-            <button class="cards__like-button" type="button"></button>
-            <p class="cards__like-count"></p>
+    <div class='popup' id='photo'>
+      <div class='popup__image-wrap'>
+        <button class='popup__close popup__close_type_image' type='button'></button>
+        <img class='popup__image' src='City' alt='City'>
+        <p class='popup__caption'></p>
+      </div>
+    </div>
+    <template id='cardTemplate'>
+      <li class='cards__item'>
+        <img class='cards__photo' src='City' alt='City'>
+        <button class='cards__close-button' type='button'></button>
+        <div class='cards__label'>
+          <h2 class='cards__name'></h2>
+          <div class='cards__like'>
+            <button class='cards__like-button' type='button'></button>
+            <p class='cards__like-count'></p>
           </div>
         </div>
       </li>
