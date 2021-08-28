@@ -44,6 +44,17 @@
         </form>
       </div>
     </div>
+    <div class='popup' id='profilePicPopup'>
+      <div class='popup__container'>
+        <button class='popup__close' type='button'></button>
+        <form class='popup__form' id='profile-pic-form' method='POST' name='form'>
+          <h3 class='popup__title popup__title_confirm'>Change profile picture</h3>
+          <input class='popup__about popup__about_profile-pic popup__input' id='profile-pic-url' type='url' placeholder='Image link' name='pic' required>
+          <span class='popup__error' id='profile-pic-form-error'></span>
+          <button class='popup__submit popup__submit_disabled popup__submit_profile-pic' id='profile-pic-submit' type='submit' name='submit' disabled>Save</button>
+        </form>
+      </div>
+    </div>
     <div class='popup' id='editProfile'>
       <div class='popup__container'>
         <button class='popup__close' type='button'></button>
