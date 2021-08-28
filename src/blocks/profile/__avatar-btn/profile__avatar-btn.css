@@ -8,7 +8,7 @@
   background-color: rgba(0,0,0,0);
 }
 .profile__avatar-btn:hover {
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0,0,0,.8);
   background-image: url('../../../images/edit-symbol.svg');
   transition: background-color .3s, background-image .3s;
   cursor: pointer;
