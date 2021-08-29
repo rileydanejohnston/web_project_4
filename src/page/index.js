@@ -6,7 +6,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css';
 
-import { editBtn, addBtn, settings, userInfoForm, newPlaceForm, profileSelectors, initialCards } from '../utils/constants.js';
+import { picBtn, editBtn, addBtn, settings, newPicForm, userInfoForm, newPlaceForm, profileSelectors, initialCards } from '../utils/constants.js';
 
 
 
@@ -20,6 +20,13 @@ const handleCardClick = (e) => {
 }
 
 
+const newPicInfo = {
+  formSelector: '#profile-pic',
+  formSubmission: ({ pic }) => {
+    console.log('UNDER CONSTRUCTION');
+    newPicPopup.close();
+  }
+}
 
 const profileFormInfo = {
   formSelector: '#profile-popup',
@@ -52,9 +59,10 @@ const sectionInfo = {
 
 const profileValidator = new FormValidator(settings, userInfoForm);
 const newPlaceValidator = new FormValidator(settings, newPlaceForm);
+const newPicValidator = new FormValidator(settings, newPicForm);
 const userProfile = new UserInfo(profileSelectors);
 const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
-
+const newPicPopup = new PopupWithForm(newPicInfo, '#profilePicPopup')
 const imagePopup = new PopupWithImage('#photo');
 const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
 const cards = new Section(sectionInfo, '.cards');
@@ -64,13 +72,18 @@ const cards = new Section(sectionInfo, '.cards');
 profilePopup.setEventListeners();
 placePopup.setEventListeners();
 imagePopup.setEventListeners();
+newPicPopup.setEventListeners();
 
 cards.renderElements();
 
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
+newPicValidator.enableValidation();
 
-
+picBtn.addEventListener('click', () => {
+  newPicValidator.resetValidation();
+  newPicPopup.open();
+});
 
 editBtn.addEventListener('click', () => {
   profileValidator.resetValidation();

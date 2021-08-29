@@ -7,8 +7,10 @@ import albuquerque from '../images/cities/albuquerque.png';
 
 export const userInfoForm = document.querySelector('#profile-popup');
 export const newPlaceForm = document.querySelector('#place-popup');
+export const newPicForm = document.querySelector('#profile-pic');
 export const addBtn = document.querySelector('.profile__add-button');
 export const editBtn = document.querySelector('.profile__edit-button');
+export const picBtn = document.querySelector('.profile__avatar-btn');
 
 export const settings = {
   formSelector: ".popup__form",
