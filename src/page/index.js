@@ -52,8 +52,18 @@ const profileFormInfo = {
 const placeFormInfo = {
   formSelector: '#place-popup',
   formSubmission: ({ title: name, link: link }) => {
+
     const addCard = createCard({ name, link }, '#cardTemplate', handleCardClick);
     cards.addItem(addCard.getCard());
+
+    api.addCard(name, link)
+      .then((res) => {
+        console.log('New card was added');
+      })
+      .catch(() => {
+        console.log('Failed to add new card');
+      });
+
     placePopup.close();
     
   }
@@ -104,7 +114,7 @@ api.getCards()
       }
     };
 
-    const cards = new Section(sectionInfo, '.cards');
+    cards = new Section(sectionInfo, '.cards');
     cards.renderElements();
   })
   .catch(() => {

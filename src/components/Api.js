@@ -50,4 +50,21 @@ export default class Api {
       return this._handleResponse(res);
     })
   }
+
+  addCard(name, link) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: {
+        authorization: this._auth,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        link
+      })
+    })
+    .then((res) => {
+      return this._handleResponse(res);
+    })
+  }
 }
