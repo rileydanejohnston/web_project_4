@@ -4,9 +4,10 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from'../components/Api.js';
 import './index.css';
 
-import { picBtn, editBtn, addBtn, settings, newPicForm, userInfoForm, newPlaceForm, profileSelectors, initialCards } from '../utils/constants.js';
+import { picBtn, editBtn, addBtn, settings, newPicForm, userInfoForm, newPlaceForm, profileSelectors, initialCards, avatar } from '../utils/constants.js';
 
 
 
@@ -68,6 +69,23 @@ const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
 const cards = new Section(sectionInfo, '.cards');
 
 
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-10",
+  headers: {
+      authorization: "2a32e80d-c23f-4ed9-9cf5-671c417d0702",
+      "Content-Type": "application/json"
+    }
+});
+
+api.loadUserInfo()
+  .then((res) => {
+    userProfile.setUserInfo(res);
+    avatar.src = res.avatar;
+  })
+  .catch(() => {
+    console.log(`Opps! I can't find that resource`);
+  })
 
 profilePopup.setEventListeners();
 placePopup.setEventListeners();

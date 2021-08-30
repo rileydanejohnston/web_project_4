@@ -11,6 +11,7 @@ export const newPicForm = document.querySelector('#profile-pic');
 export const addBtn = document.querySelector('.profile__add-button');
 export const editBtn = document.querySelector('.profile__edit-button');
 export const picBtn = document.querySelector('.profile__avatar-btn');
+export const avatar = document.querySelector('.profile__avatar');
 
 export const settings = {
   formSelector: ".popup__form",
