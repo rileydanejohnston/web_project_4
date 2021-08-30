@@ -2,7 +2,7 @@ export default class Api {
   constructor(settings) {
     this._baseUrl = settings.baseUrl;
     this._auth = settings.headers.authorization;
-    this._headers = { headers: settings.headers };
+    this._headers = settings.headers;
   }
 
   _handleResponse(res) {
@@ -13,14 +13,22 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, this._headers)
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        authorization: this._auth
+      }
+    })
       .then((res) => {
         return this._handleResponse(res);
       });
   }
 
   getCards() {
-    return fetch(`${this._baseUrl}/cards`, this._headers)
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: {
+        authorization: this._auth
+      }
+    })
       .then((res) => {
         return this._handleResponse(res);
       });
