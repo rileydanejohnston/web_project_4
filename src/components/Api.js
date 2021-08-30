@@ -11,8 +11,15 @@ export default class Api {
     return Promise.reject();
   }
 
-  loadUserInfo() {
+  getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, this._headers)
+      .then((res) => {
+        return this._handleResponse(res);
+      });
+  }
+
+  getCards() {
+    return fetch(`${this._baseUrl}/cards`, this._headers)
       .then((res) => {
         return this._handleResponse(res);
       });

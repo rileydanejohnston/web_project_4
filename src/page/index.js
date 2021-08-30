@@ -7,7 +7,7 @@ import UserInfo from '../components/UserInfo.js';
 import Api from'../components/Api.js';
 import './index.css';
 
-import { picBtn, editBtn, addBtn, settings, newPicForm, userInfoForm, newPlaceForm, profileSelectors, initialCards, avatar } from '../utils/constants.js';
+import { picBtn, editBtn, addBtn, settings, newPicForm, userInfoForm, newPlaceForm, profileSelectors, avatar } from '../utils/constants.js';
 
 
 
@@ -48,13 +48,6 @@ const placeFormInfo = {
   }
 };
 
-const sectionInfo = {
-  items: initialCards, 
-  renderer: (item) => {
-    const newCard = createCard(item, '#cardTemplate', handleCardClick);
-    cards.addItem(newCard.getCard());
-  }
-};
 
 
 
@@ -66,7 +59,7 @@ const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
 const newPicPopup = new PopupWithForm(newPicInfo, '#profilePicPopup')
 const imagePopup = new PopupWithImage('#photo');
 const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
-const cards = new Section(sectionInfo, '.cards');
+let cards = null;
 
 
 
@@ -78,21 +71,43 @@ const api = new Api({
     }
 });
 
-api.loadUserInfo()
+api.getUserInfo()
   .then((res) => {
     userProfile.setUserInfo(res);
     avatar.src = res.avatar;
   })
   .catch(() => {
-    console.log(`Opps! I can't find that resource`);
+    console.log(`User info failed to load`);
+  });
+
+
+
+api.getCards()
+  .then((res) => {
+
+    const sectionInfo = {
+      items: res, 
+      renderer: (item) => {
+        const newCard = createCard(item, '#cardTemplate', handleCardClick);
+        cards.addItem(newCard.getCard());
+      }
+    };
+
+    const cards = new Section(sectionInfo, '.cards');
+    cards.renderElements();
   })
+  .catch(() => {
+    console.log(`The cards failed to load`);
+  });
+
+
+
+
 
 profilePopup.setEventListeners();
 placePopup.setEventListeners();
 imagePopup.setEventListeners();
 newPicPopup.setEventListeners();
-
-cards.renderElements();
 
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();

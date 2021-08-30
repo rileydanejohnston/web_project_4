@@ -1,10 +1,3 @@
-import stPaul from '../images/cities/stPaul.png';
-import la from '../images/cities/losAngeles.png';
-import kansas from '../images/cities/kansasCity.png';
-import charleston from '../images/cities/charleston.png';
-import austin from '../images/cities/austin.png';
-import albuquerque from '../images/cities/albuquerque.png';
-
 export const userInfoForm = document.querySelector('#profile-popup');
 export const newPlaceForm = document.querySelector('#place-popup');
 export const newPicForm = document.querySelector('#profile-pic');
@@ -21,33 +14,6 @@ export const settings = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
 };
-
-export const initialCards = [
-  {
-    name: "St. Paul",
-    link: stPaul
-  },
-  {
-    name: "Los Angeles",
-    link: la
-  },
-  {
-    name: "Kansas City",
-    link: kansas
-  },
-  {
-    name: "Charleston",
-    link: charleston
-  },
-  {
-    name: "Austin",
-    link: austin
-  },
-  {
-    name: "Albuquerque",
-    link: albuquerque
-  },
-];
 
 export const profileSelectors = {
   nameSelector: '.profile__name',
