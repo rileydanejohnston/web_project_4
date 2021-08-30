@@ -1,6 +1,7 @@
 export default class Api {
   constructor(settings) {
     this._baseUrl = settings.baseUrl;
+    this._auth = settings.headers.authorization;
     this._headers = { headers: settings.headers };
   }
 
@@ -23,5 +24,22 @@ export default class Api {
       .then((res) => {
         return this._handleResponse(res);
       });
+  }
+
+  updateProfile({ name, about }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._auth,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        about
+      })
+    })
+    .then((res) => {
+      return this._handleResponse(res);
+    })
   }
 }

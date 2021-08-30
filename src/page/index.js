@@ -33,6 +33,17 @@ const profileFormInfo = {
   formSelector: '#profile-popup',
   formSubmission: ({ name, about }) => {
     userProfile.setUserInfo({ name: name, about: about });
+
+    api.updateProfile(userProfile.getUserInfo())
+      .then((res) => {
+        if (res){
+          console.log(`All good.`);
+        }
+      })
+      .catch(() => {
+        console.log(`Failed to update the profile`);
+      });
+
     profilePopup.close();
     
   }
@@ -99,6 +110,8 @@ api.getCards()
   .catch(() => {
     console.log(`The cards failed to load`);
   });
+
+
 
 
 
