@@ -11,8 +11,8 @@ import { picBtn, editBtn, addBtn, settings, newPicForm, userInfoForm, newPlaceFo
 
 
 
-const createCard = (cardInfo, cardSelector, cardClick) => {
-  return new Card(cardInfo, cardSelector, cardClick);
+const createCard = (cardInfo, cardSelector, cardClick, deleteClick) => {
+  return new Card(cardInfo, cardSelector, cardClick, deleteClick);
 }
 
 const handleCardClick = (e) => {
@@ -69,7 +69,18 @@ const placeFormInfo = {
   }
 };
 
+const deletePopupInfo = {
+  formSelector: '#confirm-form',
+  formSubmission: () => {
+    console.log('UNDER CONSTRUCTION');
+    deletePopup.close();
+  }
+}
 
+const handleDeleteClick = (e) => {
+  console.log(e.target.parentElement);
+  deletePopup.open();
+}
 
 
 const profileValidator = new FormValidator(settings, userInfoForm);
@@ -80,6 +91,7 @@ const profilePopup = new PopupWithForm(profileFormInfo, '#editProfile');
 const newPicPopup = new PopupWithForm(newPicInfo, '#profilePicPopup')
 const imagePopup = new PopupWithImage('#photo');
 const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
+const deletePopup = new PopupWithForm(deletePopupInfo,'#confirmPopup');
 let cards = null;
 
 
@@ -108,8 +120,7 @@ api.getCards()
     const sectionInfo = {
       items: res, 
       renderer: (item) => {
-        const newCard = createCard(item, '#cardTemplate', handleCardClick);
-        console.log(item.likes);
+        const newCard = createCard(item, '#cardTemplate', handleCardClick, handleDeleteClick);
         cards.addItem(newCard.getCard());
       }
     };
@@ -131,6 +142,7 @@ profilePopup.setEventListeners();
 placePopup.setEventListeners();
 imagePopup.setEventListeners();
 newPicPopup.setEventListeners();
+deletePopup.setEventListeners();
 
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
