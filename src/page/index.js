@@ -105,11 +105,11 @@ api.getUserInfo()
 
 api.getCards()
   .then((res) => {
-
     const sectionInfo = {
       items: res, 
       renderer: (item) => {
         const newCard = createCard(item, '#cardTemplate', handleCardClick);
+        console.log(item.likes);
         cards.addItem(newCard.getCard());
       }
     };
