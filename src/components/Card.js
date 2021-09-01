@@ -1,5 +1,6 @@
 export default class Card {
-  constructor({ name, link, likes, _id, owner }, selector, handleCardClick, handleBinClick) {
+  constructor({ name, link, likes, _id, owner }, selector, handleCardClick, handleBinClick, handleLikeCard) {
+    //, addLike, removeLike
     this._text = name;
     this._link = link;
     this._likes = likes.length;
@@ -9,16 +10,19 @@ export default class Card {
     this._element = null;
     this._handleCardClick = handleCardClick;
     this._handleBinClick = handleBinClick;
+    this._handleLike = handleLikeCard;
   }
 
 
-  _deleteCard() {
-    this._element.remove();
-  }
-
-
-  _likeCard(e) {
-    e.target.classList.toggle('cards__like-button_active');
+  
+  _updatePageLikes(e) {
+    if (e.target.classList.contains('cards__like-button_active'))
+    {
+      e.target.classList.remove('cards__like-button_active');
+    }
+    else {
+      e.target.classList.add('cards__like-button_active');
+    }
   }
 
 
@@ -29,12 +33,13 @@ export default class Card {
 
   _setEventListeners() {
     const photo = this._element.querySelector('.cards__photo');
-    //const close = this._element.querySelector('.cards__close-button'); 
     const like = this._element.querySelector('.cards__like-button');
     
 
-    //close.addEventListener('click', (e) => this._handleDeleteClick(e));
-    like.addEventListener('click', (e) => this._likeCard(e));
+    like.addEventListener('click', (e) => {
+      this._handleLike(e);
+      this._updatePageLikes(e);
+    });
     photo.addEventListener('click', (e) => this._enlargePhoto(e));
   }
 

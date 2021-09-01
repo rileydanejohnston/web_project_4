@@ -11,12 +11,44 @@ import { picBtn, editBtn, addBtn, settings, newPicForm, userInfoForm, newPlaceFo
 
 
 let cardToDelete = null;
+let likeCard = null;
 let cards = null;
 let myId = null;
 
 
-const createCard = (cardInfo, cardSelector, cardClick, deleteClick) => {
-  return new Card(cardInfo, cardSelector, cardClick, deleteClick);
+const createCard = (cardInfo, cardSelector, cardClick, deleteClick, handleLikeCard) => {
+  return new Card(cardInfo, cardSelector, cardClick, deleteClick, handleLikeCard);
+}
+
+const handleLikeCard = (e) => {
+  const card = e.target.parentElement.parentElement.parentElement;
+  const likeBtn = e.target;
+  const numLikesElem = e.target.nextElementSibling;
+  let serverLikes = null;
+
+  console.log(e);
+
+  if (e.target.classList.contains('cards__like-button_active')){
+    api.removeLike(card.id)
+    .then((res) => {
+      serverLikes = res.likes.length;
+      numLikesElem.textContent = serverLikes;
+    })
+    .catch(() => {
+      console.log(`Cannot add a like to the server`);
+    });
+  }
+  else {
+    api.addLike(card.id)
+    .then((res) => {
+      serverLikes = res.likes.length;
+      numLikesElem.textContent = serverLikes;
+    })
+    .catch(() => {
+      console.log(`Cannot remove a like from the server`);
+    });
+  }
+  
 }
 
 const handleCardClick = (e) => {
@@ -140,7 +172,7 @@ api.getCards()
       items: res, 
       renderer: (item) => {
 
-        const newCard = createCard(item, '#cardTemplate', handleCardClick, handleBinClick);
+        const newCard = createCard(item, '#cardTemplate', handleCardClick, handleBinClick, handleLikeCard);
         cards.addItem(newCard.getCard(myId));
       }
 
