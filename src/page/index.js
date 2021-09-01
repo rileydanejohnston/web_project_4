@@ -93,6 +93,7 @@ const imagePopup = new PopupWithImage('#photo');
 const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
 const deletePopup = new PopupWithForm(deletePopupInfo,'#confirmPopup');
 let cards = null;
+let myId = null;
 
 
 
@@ -107,6 +108,8 @@ const api = new Api({
 api.getUserInfo()
   .then((res) => {
     userProfile.setUserInfo(res);
+    console.log(res);
+    myId = res._id;
     avatar.src = res.avatar;
   })
   .catch(() => {
@@ -117,11 +120,13 @@ api.getUserInfo()
 
 api.getCards()
   .then((res) => {
+    //console.log(res[0]);
     const sectionInfo = {
       items: res, 
       renderer: (item) => {
         const newCard = createCard(item, '#cardTemplate', handleCardClick, handleDeleteClick);
-        cards.addItem(newCard.getCard());
+        //console.log(item.owner._id);
+        cards.addItem(newCard.getCard(myId));
       }
     };
 

@@ -1,8 +1,10 @@
 export default class Card {
-  constructor({ name, link, likes }, selector, handleCardClick, handleDeleteClick) {
+  constructor({ name, link, likes, _id, owner }, selector, handleCardClick, handleDeleteClick) {
     this._text = name;
     this._link = link;
     this._likes = likes.length;
+    this._cardId = _id;
+    this._ownerId = owner._id;
     this._selector = selector;
     this._element = null;
     this._handleCardClick = handleCardClick;
@@ -27,11 +29,11 @@ export default class Card {
 
   _setEventListeners() {
     const photo = this._element.querySelector('.cards__photo');
-    const close = this._element.querySelector('.cards__close-button'); 
+    //const close = this._element.querySelector('.cards__close-button'); 
     const like = this._element.querySelector('.cards__like-button');
     
 
-    close.addEventListener('click', (e) => this._handleDeleteClick(e));
+    //close.addEventListener('click', (e) => this._handleDeleteClick(e));
     like.addEventListener('click', (e) => this._likeCard(e));
     photo.addEventListener('click', (e) => this._enlargePhoto(e));
   }
@@ -43,9 +45,30 @@ export default class Card {
     return cardTemplate;
   }
 
+
+  _getBinTemplate() {
+    const binTemplate = document.querySelector('#binTemplate').content.querySelector('.cards__close-button').cloneNode(true);
+
+    return binTemplate;
+  }
+
+  _setBinListener() {
+    this._binIcon.addEventListener('click', (e) => this._handleDeleteClick(e));
+  }
+
+  _addBin() {
+    this._element.prepend(this._binIcon);
+  }
   
-  getCard() {
+  getCard(myId) {
     this._element = this._getTemplate();
+
+    if (myId === this._ownerId){
+      this._binIcon = this._getBinTemplate();
+      this._setBinListener();
+      this._addBin();
+    }
+
     this._setEventListeners();
     
     const cardImage = this._element.querySelector('.cards__photo');
