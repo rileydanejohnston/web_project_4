@@ -10,6 +10,10 @@ import './index.css';
 import { picBtn, editBtn, addBtn, settings, newPicForm, userInfoForm, newPlaceForm, profileSelectors, avatar } from '../utils/constants.js';
 
 
+let cardToDelete = null;
+let cards = null;
+let myId = null;
+
 
 const createCard = (cardInfo, cardSelector, cardClick, deleteClick) => {
   return new Card(cardInfo, cardSelector, cardClick, deleteClick);
@@ -72,13 +76,27 @@ const placeFormInfo = {
 const deletePopupInfo = {
   formSelector: '#confirm-form',
   formSubmission: () => {
-    console.log('UNDER CONSTRUCTION');
+
     deletePopup.close();
+    
+    api.deleteCard(cardToDelete.id)
+      .then((res) => {
+        console.log(`Card deleted from server`);
+      })
+      .catch(() => {
+        console.log(`Card failed to delete from the server`);
+      });
+    // delete card from page
+    
+    cardToDelete.remove();
+  
   }
 }
 
-const handleDeleteClick = (e) => {
+
+const handleBinClick = (e) => {
   console.log(e.target.parentElement);
+  cardToDelete = e.target.parentElement;
   deletePopup.open();
 }
 
@@ -92,8 +110,6 @@ const newPicPopup = new PopupWithForm(newPicInfo, '#profilePicPopup')
 const imagePopup = new PopupWithImage('#photo');
 const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
 const deletePopup = new PopupWithForm(deletePopupInfo,'#confirmPopup');
-let cards = null;
-let myId = null;
 
 
 
@@ -108,7 +124,6 @@ const api = new Api({
 api.getUserInfo()
   .then((res) => {
     userProfile.setUserInfo(res);
-    console.log(res);
     myId = res._id;
     avatar.src = res.avatar;
   })
@@ -120,14 +135,15 @@ api.getUserInfo()
 
 api.getCards()
   .then((res) => {
-    //console.log(res[0]);
+
     const sectionInfo = {
       items: res, 
       renderer: (item) => {
-        const newCard = createCard(item, '#cardTemplate', handleCardClick, handleDeleteClick);
-        //console.log(item.owner._id);
+
+        const newCard = createCard(item, '#cardTemplate', handleCardClick, handleBinClick);
         cards.addItem(newCard.getCard(myId));
       }
+
     };
 
     cards = new Section(sectionInfo, '.cards');
@@ -136,10 +152,6 @@ api.getCards()
   .catch(() => {
     console.log(`The cards failed to load`);
   });
-
-
-
-
 
 
 

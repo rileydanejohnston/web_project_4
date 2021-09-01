@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ name, link, likes, _id, owner }, selector, handleCardClick, handleDeleteClick) {
+  constructor({ name, link, likes, _id, owner }, selector, handleCardClick, handleBinClick) {
     this._text = name;
     this._link = link;
     this._likes = likes.length;
@@ -8,7 +8,7 @@ export default class Card {
     this._selector = selector;
     this._element = null;
     this._handleCardClick = handleCardClick;
-    this._handleDeleteClick = handleDeleteClick;
+    this._handleBinClick = handleBinClick;
   }
 
 
@@ -53,7 +53,7 @@ export default class Card {
   }
 
   _setBinListener() {
-    this._binIcon.addEventListener('click', (e) => this._handleDeleteClick(e));
+    this._binIcon.addEventListener('click', (e) => this._handleBinClick(e));
   }
 
   _addBin() {
@@ -75,6 +75,7 @@ export default class Card {
     const cardName = this._element.querySelector('.cards__name');
     const likeElement = this._element.querySelector('.cards__like-count');
 
+    this._element.id = this._cardId;
     cardImage.src = this._link;
     cardImage.alt = this._text;
     cardName.textContent = this._text;
