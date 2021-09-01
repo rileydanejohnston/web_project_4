@@ -60,7 +60,16 @@ const handleCardClick = (e) => {
 const newPicInfo = {
   formSelector: '#profile-pic',
   formSubmission: ({ pic }) => {
-    console.log('UNDER CONSTRUCTION');
+    console.log(pic);
+    api.updateProfilePic(pic)
+      .then((res) => {
+        console.log('Profile pic updated on the server');
+      })
+      .catch(() => {
+        console.log('Updating profile pic failed');
+      })
+    avatar.style.backgroundImage = `url(${pic})`;
+    console.log(avatar);
     newPicPopup.close();
   }
 }
@@ -72,9 +81,7 @@ const profileFormInfo = {
 
     api.updateProfile(userProfile.getUserInfo())
       .then((res) => {
-        if (res){
-          console.log(`All good.`);
-        }
+        console.log(`The profile has been updated.`);
       })
       .catch(() => {
         console.log(`Failed to update the profile`);
@@ -157,7 +164,7 @@ api.getUserInfo()
   .then((res) => {
     userProfile.setUserInfo(res);
     myId = res._id;
-    avatar.src = res.avatar;
+    avatar.style.backgroundImage = `url(${res.avatar})`;
   })
   .catch(() => {
     console.log(`User info failed to load`);

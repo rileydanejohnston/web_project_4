@@ -103,4 +103,20 @@ export default class Api {
       return this._handleResponse(res);
     })
   }
+
+  updateProfilePic(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._auth,
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        avatar
+      })
+    })
+    .then((res) => {
+      return this._handleResponse(res);
+    })
+  }
 }
