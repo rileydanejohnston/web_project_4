@@ -26,7 +26,6 @@ const handleLikeCard = (e) => {
   const numLikesElem = e.target.nextElementSibling;
   let serverLikes = null;
 
-  console.log(e);
 
   if (e.target.classList.contains('cards__like-button_active')){
     api.removeLike(card.id)
@@ -60,7 +59,7 @@ const handleCardClick = (e) => {
 const newPicInfo = {
   formSelector: '#profile-pic',
   formSubmission: ({ pic }) => {
-    console.log(pic);
+
     api.updateProfilePic(pic)
       .then((res) => {
         console.log('Profile pic updated on the server');
@@ -68,9 +67,12 @@ const newPicInfo = {
       .catch(() => {
         console.log('Updating profile pic failed');
       })
+      .finally(() => {
+        newPicPopup.saveMessage(false);
+        newPicPopup.close();
+      });
     avatar.style.backgroundImage = `url(${pic})`;
-    console.log(avatar);
-    newPicPopup.close();
+    
   }
 }
 
@@ -85,17 +87,17 @@ const profileFormInfo = {
       })
       .catch(() => {
         console.log(`Failed to update the profile`);
+      })
+      .finally(() => {
+        profilePopup.saveMessage(false);
+        profilePopup.close();
       });
-
-    profilePopup.close();
-    
   }
 };
 
 const placeFormInfo = {
   formSelector: '#place-popup',
   formSubmission: ({ title: name, link: link }) => {
-
   
 
     api.addCard(name, link)
@@ -106,10 +108,11 @@ const placeFormInfo = {
       })
       .catch(() => {
         console.log('Failed to add new card');
+      })
+      .finally(() => {
+        placePopup.saveMessage(false);
+        placePopup.close();
       });
-
-    placePopup.close();
-    
   }
 };
 
@@ -135,7 +138,6 @@ const deletePopupInfo = {
 
 
 const handleBinClick = (e) => {
-  console.log(e.target.parentElement);
   cardToDelete = e.target.parentElement;
   deletePopup.open();
 }
