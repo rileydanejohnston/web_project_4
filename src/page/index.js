@@ -96,11 +96,12 @@ const placeFormInfo = {
   formSelector: '#place-popup',
   formSubmission: ({ title: name, link: link }) => {
 
-    const addCard = createCard({ name, link }, '#cardTemplate', handleCardClick);
-    cards.addItem(addCard.getCard());
+  
 
     api.addCard(name, link)
       .then((res) => {
+        const addCard = createCard(res, '#cardTemplate', handleCardClick, handleBinClick, handleLikeCard);
+        cards.addItem(addCard.getCard(myId));
         console.log('New card was added');
       })
       .catch(() => {
