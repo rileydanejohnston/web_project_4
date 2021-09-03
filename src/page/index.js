@@ -105,7 +105,11 @@ const deletePopupInfo = {
       })
       .catch(() => {
         console.log(`Card failed to delete from the server`);
-      });
+      })
+      .finally(() => {
+        deletePopup.saveMessage(false);
+        deletePopup.close();
+      });;
   }
 }
 
