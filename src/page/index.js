@@ -76,7 +76,6 @@ const profileFormInfo = {
 const placeFormInfo = {
   formSelector: '#place-popup',
   formSubmission: ({ title: name, link: link }) => {
-  
 
     api.addCard(name, link)
       .then((res) => {
@@ -97,20 +96,16 @@ const placeFormInfo = {
 const deletePopupInfo = {
   formSelector: '#confirm-form',
   formSubmission: () => {
-
-    deletePopup.close();
     
     api.deleteCard(cardToDelete.id)
       .then((res) => {
+        deletePopup.close();
+        cardToDelete.remove();
         console.log(`Card deleted from server`);
       })
       .catch(() => {
         console.log(`Card failed to delete from the server`);
       });
-    // delete card from page
-    
-    cardToDelete.remove();
-  
   }
 }
 
