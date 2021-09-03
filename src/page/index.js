@@ -45,8 +45,8 @@ const newPicInfo = {
         newPicPopup.close();
         avatar.style.backgroundImage = `url(${pic})`;
       })
-      .catch(() => {
-        console.log('Updating profile pic failed');
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         newPicPopup.saveMessage(false);
@@ -63,8 +63,8 @@ const profileFormInfo = {
         userProfile.setUserInfo({ name: name, about: about });
         console.log(`The profile has been updated.`);
       })
-      .catch(() => {
-        console.log(`Failed to update the profile`);
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         profilePopup.saveMessage(false);
@@ -83,8 +83,8 @@ const placeFormInfo = {
         cards.addItem(addCard.getCard(myId));
         console.log('New card was added');
       })
-      .catch(() => {
-        console.log('Failed to add new card');
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         placePopup.saveMessage(false);
@@ -103,8 +103,8 @@ const deletePopupInfo = {
         cardToDelete.remove();
         console.log(`Card deleted from server`);
       })
-      .catch(() => {
-        console.log(`Card failed to delete from the server`);
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         deletePopup.saveMessage(false);
