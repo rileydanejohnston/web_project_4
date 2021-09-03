@@ -42,30 +42,29 @@ const newPicInfo = {
     api.updateProfilePic(pic)
       .then((res) => {
         console.log('Profile pic updated on the server');
+        newPicPopup.close();
+        avatar.style.backgroundImage = `url(${pic})`;
       })
-      .catch(() => {
-        console.log('Updating profile pic failed');
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         newPicPopup.saveMessage(false);
-        newPicPopup.close();
       });
-    avatar.style.backgroundImage = `url(${pic})`;
-    
   }
 }
 
 const profileFormInfo = {
   formSelector: '#profile-popup',
   formSubmission: ({ name, about }) => {
-    userProfile.setUserInfo({ name: name, about: about });
 
     api.updateProfile(userProfile.getUserInfo())
       .then((res) => {
+        userProfile.setUserInfo({ name: name, about: about });
         console.log(`The profile has been updated.`);
       })
-      .catch(() => {
-        console.log(`Failed to update the profile`);
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         profilePopup.saveMessage(false);
@@ -77,7 +76,6 @@ const profileFormInfo = {
 const placeFormInfo = {
   formSelector: '#place-popup',
   formSubmission: ({ title: name, link: link }) => {
-  
 
     api.addCard(name, link)
       .then((res) => {
@@ -85,8 +83,8 @@ const placeFormInfo = {
         cards.addItem(addCard.getCard(myId));
         console.log('New card was added');
       })
-      .catch(() => {
-        console.log('Failed to add new card');
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         placePopup.saveMessage(false);
@@ -98,20 +96,20 @@ const placeFormInfo = {
 const deletePopupInfo = {
   formSelector: '#confirm-form',
   formSubmission: () => {
-
-    deletePopup.close();
     
     api.deleteCard(cardToDelete.id)
       .then((res) => {
+        deletePopup.close();
+        cardToDelete.remove();
         console.log(`Card deleted from server`);
       })
-      .catch(() => {
-        console.log(`Card failed to delete from the server`);
-      });
-    // delete card from page
-    
-    cardToDelete.remove();
-  
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        deletePopup.saveMessage(false);
+        deletePopup.close();
+      });;
   }
 }
 
@@ -133,7 +131,6 @@ const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
 const deletePopup = new PopupWithForm(deletePopupInfo,'#confirmPopup');
 
 
-
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-10",
   headers: {
@@ -142,39 +139,26 @@ const api = new Api({
     }
 });
 
-api.getUserInfo()
-  .then((res) => {
-    userProfile.setUserInfo(res);
-    myId = res._id;
-    avatar.style.backgroundImage = `url(${res.avatar})`;
-  })
-  .catch(() => {
-    console.log(`User info failed to load`);
-  });
-
-
-
-api.getCards()
-  .then((res) => {
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userData, initialCards]) => {
+    userProfile.setUserInfo(userData);
+    myId = userData._id;
+    avatar.style.backgroundImage = `url(${userData.avatar})`;
 
     const sectionInfo = {
-      items: res, 
+      items: initialCards, 
       renderer: (item) => {
-
         const newCard = createCard(item, '#cardTemplate', handleCardClick, handleBinClick, handleLikeCard);
         cards.addItem(newCard.getCard(myId));
       }
-
     };
 
     cards = new Section(sectionInfo, '.cards');
     cards.renderElements();
   })
-  .catch(() => {
-    console.log(`The cards failed to load`);
+  .catch((err) => {
+    console.log(err);
   });
-
-
 
 profilePopup.setEventListeners();
 placePopup.setEventListeners();
