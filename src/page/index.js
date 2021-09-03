@@ -20,38 +20,17 @@ const createCard = (cardInfo, cardSelector, cardClick, deleteClick, handleLikeCa
   return new Card(cardInfo, cardSelector, cardClick, deleteClick, handleLikeCard);
 }
 
-const handleLikeCard = (e) => {
-  const card = e.target.parentElement.parentElement.parentElement;
-  const likeBtn = e.target;
-  const numLikesElem = e.target.nextElementSibling;
-  let serverLikes = null;
-
-
-  if (e.target.classList.contains('cards__like-button_active')){
-    api.removeLike(card.id)
-    .then((res) => {
-      serverLikes = res.likes.length;
-      numLikesElem.textContent = serverLikes;
-    })
-    .catch(() => {
-      console.log(`Cannot add a like to the server`);
-    });
+const handleLikeCard = (id, isLiked) => {
+  if (isLiked){
+    return api.addLike(id);
   }
   else {
-    api.addLike(card.id)
-    .then((res) => {
-      serverLikes = res.likes.length;
-      numLikesElem.textContent = serverLikes;
-    })
-    .catch(() => {
-      console.log(`Cannot remove a like from the server`);
-    });
-  }
-  
+    return api.removeLike(id);
+  }  
 }
 
-const handleCardClick = (e) => {
-  const clickedPhoto = { name: e.target.alt, link: e.target.src }
+const handleCardClick = (img) => {
+  const clickedPhoto = { name: img.alt, link: img.src }
   imagePopup.open(clickedPhoto);
 }
 
