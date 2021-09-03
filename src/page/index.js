@@ -42,16 +42,15 @@ const newPicInfo = {
     api.updateProfilePic(pic)
       .then((res) => {
         console.log('Profile pic updated on the server');
+        newPicPopup.close();
+        avatar.style.backgroundImage = `url(${pic})`;
       })
       .catch(() => {
         console.log('Updating profile pic failed');
       })
       .finally(() => {
         newPicPopup.saveMessage(false);
-        newPicPopup.close();
       });
-    avatar.style.backgroundImage = `url(${pic})`;
-    
   }
 }
 
