@@ -127,7 +127,6 @@ const placePopup = new PopupWithForm(placeFormInfo, '#newPlace');
 const deletePopup = new PopupWithForm(deletePopupInfo,'#confirmPopup');
 
 
-
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-10",
   headers: {
@@ -136,39 +135,26 @@ const api = new Api({
     }
 });
 
-api.getUserInfo()
-  .then((res) => {
-    userProfile.setUserInfo(res);
-    myId = res._id;
-    avatar.style.backgroundImage = `url(${res.avatar})`;
-  })
-  .catch(() => {
-    console.log(`User info failed to load`);
-  });
-
-
-
-api.getCards()
-  .then((res) => {
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userData, initialCards]) => {
+    userProfile.setUserInfo(userData);
+    myId = userData._id;
+    avatar.style.backgroundImage = `url(${userData.avatar})`;
 
     const sectionInfo = {
-      items: res, 
+      items: initialCards, 
       renderer: (item) => {
-
         const newCard = createCard(item, '#cardTemplate', handleCardClick, handleBinClick, handleLikeCard);
         cards.addItem(newCard.getCard(myId));
       }
-
     };
 
     cards = new Section(sectionInfo, '.cards');
     cards.renderElements();
   })
-  .catch(() => {
-    console.log(`The cards failed to load`);
+  .catch((err) => {
+    console.log(err);
   });
-
-
 
 profilePopup.setEventListeners();
 placePopup.setEventListeners();
