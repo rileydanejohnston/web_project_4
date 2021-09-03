@@ -57,10 +57,10 @@ const newPicInfo = {
 const profileFormInfo = {
   formSelector: '#profile-popup',
   formSubmission: ({ name, about }) => {
-    userProfile.setUserInfo({ name: name, about: about });
 
     api.updateProfile(userProfile.getUserInfo())
       .then((res) => {
+        userProfile.setUserInfo({ name: name, about: about });
         console.log(`The profile has been updated.`);
       })
       .catch(() => {
