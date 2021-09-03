@@ -15,32 +15,39 @@ export default class Card {
 
 
   
-  _updatePageLikes(e) {
-    if (e.target.classList.contains('cards__like-button_active'))
+  _updatePageLikes() {
+    if (this._likeBtn.classList.contains('cards__like-button_active'))
     {
-      e.target.classList.remove('cards__like-button_active');
+      this._likeBtn.classList.remove('cards__like-button_active');
+      return false;
     }
     else {
-      e.target.classList.add('cards__like-button_active');
+      this._likeBtn.classList.add('cards__like-button_active');
+      return true;
     }
   }
 
 
-  _enlargePhoto(e) {
-    this._handleCardClick(e);
+  _enlargePhoto(img) {
+    this._handleCardClick(img);
   }
 
 
   _setEventListeners() {
-    const photo = this._element.querySelector('.cards__photo');
-    const like = this._element.querySelector('.cards__like-button');
-    
+    this._likeBtn.addEventListener('click', () => {
+      const isLiked = this._updatePageLikes();
 
-    like.addEventListener('click', (e) => {
-      this._handleLike(e);
-      this._updatePageLikes(e);
+      this._handleLike(this._cardId, isLiked)
+        .then((res) => {
+          this._likeCount.textContent = res.likes.length;
+          console.log('Updated likes successfully');
+        })
+        .catch(() => {
+          console.log('Unable to update likes');
+        });
     });
-    photo.addEventListener('click', (e) => this._enlargePhoto(e));
+
+    this._photo.addEventListener('click', (e) => this._enlargePhoto(this._photo));
   }
 
 
@@ -73,18 +80,19 @@ export default class Card {
       this._setBinListener();
       this._addBin();
     }
+    
+    this._photo = this._element.querySelector('.cards__photo');
+    this._photoName = this._element.querySelector('.cards__name');
+    this._likeBtn = this._element.querySelector('.cards__like-button');
+    this._likeCount = this._element.querySelector('.cards__like-count');
 
     this._setEventListeners();
-    
-    const cardImage = this._element.querySelector('.cards__photo');
-    const cardName = this._element.querySelector('.cards__name');
-    const likeElement = this._element.querySelector('.cards__like-count');
 
     this._element.id = this._cardId;
-    cardImage.src = this._link;
-    cardImage.alt = this._text;
-    cardName.textContent = this._text;
-    likeElement.textContent = this._likes;
+    this._photo.src = this._link;
+    this._photo.alt = this._text;
+    this._photoName.textContent = this._text;
+    this._likeCount.textContent = this._likes;
 
     return this._element;
   }
